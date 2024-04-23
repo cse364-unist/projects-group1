@@ -16,6 +16,7 @@ public class Movie {
     private int movieId;
     private String name;
     private String genre;
+    private String url; // 파티룸 페이지 URL
 
     public Movie(int movieId, String name, String genre){
         this.movieId = movieId;
