@@ -1,0 +1,11 @@
+package com.example.store.repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.example.entity.User;
+import java.util.Optional;
+
+
+public interface UserRepository extends MongoRepository<User, String>{
+    Optional<User> findByUserId(int userId);
+}

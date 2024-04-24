@@ -11,4 +11,5 @@ public interface MovieService {
     void modifyMovie(MovieRequest newMovie, int movieId);
     int findMaxMovieId();
     List<MovieRequest> callMoviesByAvg(List<Integer> movieIds);
+    List<MovieRequest> callMoviesByPlaceId(int placeId);
 }
