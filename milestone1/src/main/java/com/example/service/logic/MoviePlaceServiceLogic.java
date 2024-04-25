@@ -50,15 +50,12 @@ public class MoviePlaceServiceLogic implements MoviePlaceService{
 
         List<MoviePlace> top5places = moviePlaces.stream()
             .sorted(Comparator.comparingInt(place -> 
-                utils.HammingSimilarity(user.getHobby(), place.getPlays()) +
-                utils.HammingSimilarity(user.getFavoriteFood(), place.getFoods())
+                utils.HammingSimilarity(user.getHobby(), place.getHobby()) +
+                utils.HammingSimilarity(user.getFavoriteFood(), place.getFavoriteFood())
             ))
             .limit(5)
             .collect(Collectors.toList());
         
         return top5places;
     }
-
-    
-
 }

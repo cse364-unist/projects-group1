@@ -33,8 +33,8 @@ public class MoviePlaceController {
     }
 
     //해당 유저id를 통해 유저의 위치를 기반으로 가까운 장소에 있는 촬영지를 List로 반환 ->threshold는 유저가 원하는 km를 반영하기 위해 RequestParam으로 설정
-    @GetMapping("/recommends")
-    public List<MoviePlace> findMoviePlaceByDis(@RequestParam(required = true) int userId, @RequestParam(defaultValue = "10") double threshold){//threshold는 km단위 디폴트로 10km로 설정
+    @GetMapping("/recommends/distance/{threshold}")
+    public List<MoviePlace> findMoviePlaceByDis(@RequestParam(required = true) int userId, @PathVariable double threshold){//threshold는 km단위 디폴트로 10km로 설정
         return moviePlaceService.callMoviePlaceByDis(userId, threshold);
     }
 

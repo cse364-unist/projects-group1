@@ -17,6 +17,6 @@ public class MoviePlace {
     private String name;
     private double latitude;
     private double longitude;
-    private int plays;
-    private int foods;
+    private int hobby;
+    private int favoriteFood;
 }
