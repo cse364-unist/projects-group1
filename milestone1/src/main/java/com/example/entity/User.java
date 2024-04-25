@@ -19,7 +19,7 @@ public class User {
     private String zipCode;
     private int point;
     private int movieStatus;
-    private int partyRoomStatus;
+    private boolean partyRoomStatus;
     private int hobby; //5개 비트 순서당 -관람, 레저, 카페, 자연, ?  
     private int favoriteFood; //5개 비트 순서당 - 한식, 중식, 일식, 디저트, 베트남
     private double latitude;
@@ -33,7 +33,7 @@ public class User {
         this.zipCode = zipCode;
         this.point = point;
         this.movieStatus = movieStatus;
-        this.partyRoomStatus = partyRoomStatus;
+        this.partyRoomStatus = false;
         this.hobby = hobby;
         this.favoriteFood = favoriteFood;
         this.latitude = latitude;
