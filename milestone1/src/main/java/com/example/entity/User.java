@@ -2,6 +2,10 @@ package com.example.entity;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 import jakarta.persistence.Id;
 import lombok.NoArgsConstructor;
 
@@ -27,8 +31,17 @@ public class User {
     private int favoriteFood; //5개 비트 순서당 - 한식, 중식, 일식, 디저트, 베트남
     private double latitude;
     private double longitude;
+    private Map<Integer, Integer> quizzes; //quizId, quiz 푼 여부. 0일 시 풀지 않음, 1일 시 정답, 2일 시 오답
 
-    public User(int userId, String gender, int age, int occupation, String zipCode, int point, int movieStatus, int partyRoomStatus, int hobby, int favoriteFood, double latitude, double longitude){
+    public Map<Integer, Integer> getQuizzes() {
+        if (quizzes == null) {
+            quizzes = new HashMap<>();
+        }
+        return quizzes;
+    }
+
+
+    public User(int userId, String gender, int age, int occupation, String zipCode, int point, int movieStatus, int partyRoomStatus, int hobby, int favoriteFood, double latitude, double longitude, Map<Integer, Integer> quizzes){
         this.userId = userId;
         this.gender = gender;
         this.age = age;
@@ -41,6 +54,7 @@ public class User {
         this.favoriteFood = favoriteFood;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.quizzes = Objects.requireNonNullElseGet(quizzes, HashMap::new);
     }
 
 }
