@@ -3,10 +3,13 @@ package com.example.entity;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.persistence.Id;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Document(collection = "rating")
 @NoArgsConstructor
 public class Rating {

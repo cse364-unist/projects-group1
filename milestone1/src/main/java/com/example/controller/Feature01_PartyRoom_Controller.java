@@ -49,11 +49,18 @@ public class Feature01_PartyRoom_Controller {
 
     // Content Zone -> generate을 해야함
     @PostMapping("/contents")
-    public Content createContent(@RequestBody Map<String, String> body) {
+    public ResponseEntity<?> createContent(@RequestBody Map<String, String> body) {
         String contentName = body.get("contentName");
+        
+        if (contentName == null) {
+            // 잘못된 요청이 들어온 경우 400 Bad Request를 반환
+            return ResponseEntity.badRequest().body("Content name cannot be null");
+        }
+        
         // 여기에서 URL을 구성하고, Content 객체를 생성한 다음 저장
         Content content = new Content(contentName, "http://localhost:8080/contents/" + contentName);
-        return partyRoomService.createContent(content);
+        Content createdContent = partyRoomService.createContent(content);
+        return ResponseEntity.ok(createdContent);
     }
 
     // 만들어진 컨텐츠 모두 보여주기
@@ -69,7 +76,7 @@ public class Feature01_PartyRoom_Controller {
         return ResponseEntity.ok(contents);
     }
     
-    // POST로 만든걸 제거하는 것.
+    // DELTE로 만든걸 제거하는 것.
     @DeleteMapping("/contents/{contentName}")
     public ResponseEntity<?> removeContent(@PathVariable String contentName) {
         boolean isDeleted = partyRoomService.deleteContentByName(contentName);
@@ -89,6 +96,9 @@ public class Feature01_PartyRoom_Controller {
     public ResponseEntity<?> getPartyRoomDetails(@PathVariable int movieId) {
         // Fetch the movie details
         Movie movie = partyRoomService.getMovieById(movieId);
+        if (movie == null) {
+            return ResponseEntity.badRequest().build();
+        }
 
         // Construct response
         HashMap<String, String> response = new HashMap<>();
@@ -103,6 +113,9 @@ public class Feature01_PartyRoom_Controller {
     public ResponseEntity<?> getPartyRoomDetailsWithContent(@PathVariable String contentName) {
         // {contentsName}으로 데이터 패치
         Content content = partyRoomService.getContentByContentName(contentName);
+        if (content == null) {
+            return ResponseEntity.badRequest().build();
+        }
 
         // 똑같은 구조의 response
         HashMap<String, String> response = new HashMap<>();
