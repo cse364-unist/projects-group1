@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.service.PartyRoomService;
 import com.example.entity.Movie;
 import com.example.entity.Content;
+//import com.example.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,11 +31,17 @@ public class Feature01_PartyRoom_Controller {
 
     // 무작위로 선택된 세 개의 영화 목록을 반환하는 엔드포인트
     @GetMapping("/movies")
-    public List<Movie> getMoviesByGenres() {
+    public ResponseEntity<List<Movie>> getMoviesByGenres() {
         List<Movie> movies = partyRoomService.findRandomTop3Movies();
-        movies.forEach(movie -> movie.setUrl("http://localhost:8080/movies/" + String.valueOf(movie.getMovieId())));
-        return movies;
+        if (movies == null || movies.isEmpty()) {
+            // 영화 목록이 비어있거나 null인 경우, 클라이언트에 NO_CONTENT 상태 코드를 반환
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(new ArrayList<>());
+        }
+        movies.forEach(movie -> movie.setUrl("http://localhost:8080/movies/" + movie.getMovieId()));
+        // 영화 목록이 있는 경우, OK 상태 코드와 함께 영화 목록을 반환
+        return ResponseEntity.ok(movies);
     }
+
 
     /* Example:
      * [{"id":"662695797e2417433ba94ff0","movieId":2432,"name":"Stepmom (1998)","genre":"Drama","url":"http://localhost:8080/movies/2432"},{"id":"662695797e2417433ba94933","movieId":644,"name":"Happy Weekend (1996)","genre":"Comedy","url":"http://localhost:8080/movies/644"},{"id":"662695797e2417433ba94990","movieId":742,"name":"Thinner (1996)","genre":"Horror|Thriller","url":"http://localhost:8080/movies/742"}]
@@ -42,11 +49,18 @@ public class Feature01_PartyRoom_Controller {
 
     // Content Zone -> generate을 해야함
     @PostMapping("/contents")
-    public Content createContent(@RequestBody Map<String, String> body) {
+    public ResponseEntity<?> createContent(@RequestBody Map<String, String> body) {
         String contentName = body.get("contentName");
+        
+        if (contentName == null) {
+            // 잘못된 요청이 들어온 경우 400 Bad Request를 반환
+            return ResponseEntity.badRequest().body("Content name cannot be null");
+        }
+        
         // 여기에서 URL을 구성하고, Content 객체를 생성한 다음 저장
         Content content = new Content(contentName, "http://localhost:8080/contents/" + contentName);
-        return partyRoomService.createContent(content);
+        Content createdContent = partyRoomService.createContent(content);
+        return ResponseEntity.ok(createdContent);
     }
 
     // 만들어진 컨텐츠 모두 보여주기
@@ -62,7 +76,7 @@ public class Feature01_PartyRoom_Controller {
         return ResponseEntity.ok(contents);
     }
     
-    // POST로 만든걸 제거하는 것.
+    // DELTE로 만든걸 제거하는 것.
     @DeleteMapping("/contents/{contentName}")
     public ResponseEntity<?> removeContent(@PathVariable String contentName) {
         boolean isDeleted = partyRoomService.deleteContentByName(contentName);
@@ -75,13 +89,16 @@ public class Feature01_PartyRoom_Controller {
 
 
     
-    
+
     // 특정 영화에 대한 상세 정보를 반환하는 엔드포인트. 이 정보에는 영화 이름, 이미지 URL, 채팅 URL이 포함
     // 웹페이지 기능들 (실시간 영상(=이미지), live chat)
     @GetMapping("/movies/{movieId}")
     public ResponseEntity<?> getPartyRoomDetails(@PathVariable int movieId) {
         // Fetch the movie details
         Movie movie = partyRoomService.getMovieById(movieId);
+        if (movie == null) {
+            return ResponseEntity.badRequest().build();
+        }
 
         // Construct response
         HashMap<String, String> response = new HashMap<>();
@@ -96,6 +113,9 @@ public class Feature01_PartyRoom_Controller {
     public ResponseEntity<?> getPartyRoomDetailsWithContent(@PathVariable String contentName) {
         // {contentsName}으로 데이터 패치
         Content content = partyRoomService.getContentByContentName(contentName);
+        if (content == null) {
+            return ResponseEntity.badRequest().build();
+        }
 
         // 똑같은 구조의 response
         HashMap<String, String> response = new HashMap<>();
@@ -105,7 +125,6 @@ public class Feature01_PartyRoom_Controller {
 
         return ResponseEntity.ok(response);
     }
-    // ... rest of your controller
 
 }
 
