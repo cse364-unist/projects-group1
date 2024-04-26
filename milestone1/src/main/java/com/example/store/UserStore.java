@@ -13,17 +13,12 @@ public class UserStore {
     @Autowired
     UserRepository userRepository;
 
-    public int create(User newUser){
-        userRepository.save(newUser);
-        return newUser.getUserId();
-    }
-
-    public User callById(int userId){
-        Optional<User> user = userRepository.findByUserId(userId);
-        if(!user.isPresent()){
+    public User callByUserId(int userId){
+        Optional<User> userOptional = userRepository.findByUserId(userId);
+        if(!userOptional.isPresent()){
             throw new UserNotFoundException(userId);
         }
-        return user.get();
+        return userOptional.get();
     }
 
     public void update(User newUser){

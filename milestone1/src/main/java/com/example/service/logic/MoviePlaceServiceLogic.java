@@ -29,7 +29,7 @@ public class MoviePlaceServiceLogic implements MoviePlaceService{
 
     @Override //하버사인 공식을 이용하여 threshold를 넘지 않는 가까운 장소들 불러오기
     public List<MoviePlace> callMoviePlaceByDis(int userId, double threshold) {
-        User user = userStore.callbyUserId(userId);
+        User user = userStore.callByUserId(userId);
         List<MoviePlace> allMoviePlaces = moviePlaceStore.callAll();
 
         return allMoviePlaces.stream()
@@ -45,7 +45,7 @@ public class MoviePlaceServiceLogic implements MoviePlaceService{
 
     @Override //유저id를 통해 hammingdistance를 이용하여 거리가 가장 짧은 top5개를 추천하도록하여 리턴
     public List<MoviePlace> recommendMoviePlaceByUserId(int userId) {
-        User user = userStore.callbyUserId(userId);
+        User user = userStore.callByUserId(userId);
         List<MoviePlace> moviePlaces = moviePlaceStore.callAll();
 
         List<MoviePlace> top5places = moviePlaces.stream()
