@@ -54,7 +54,7 @@ public class QuizController {
         else {
             QuizCheckResponse quizCheckResponse = new QuizCheckResponse();
             quizCheckResponse.setQuizId(quizId);
-            quizCheckResponse.setResultMessage("You already solved this quiz");
+            quizCheckResponse.setResultMessage("You've already answered this quiz");
             return quizCheckResponse;
         }
 
