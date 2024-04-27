@@ -109,4 +109,43 @@ public class QuizControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("userId").value(2))
                 .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("Successfully reset"));
     }
+
+    @Test
+    public void testPostQuizAlreadyAnswered() throws Exception {
+        //Reset user 2's quiz 10 status
+        String jsonRequestBody1 = "{\"userId\":2}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/reset/10")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequestBody1))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(10))
+                .andExpect(MockMvcResultMatchers.jsonPath("userId").value(2));
+
+        //Test for answer
+        String jsonRequestBody2 = "{\"userId\":2,\"userAnswer\":2}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/10")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequestBody2))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(10))
+                .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("Wrong Answer!"));
+
+        //Test for Already answered quiz
+        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/10")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequestBody2))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(10))
+                .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("You've already answered this quiz"));
+
+        //Test for reset quiz status: successfully reset
+        String jsonRequestBody3 = "{\"userId\":2}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/reset/10")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequestBody3))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(10))
+                .andExpect(MockMvcResultMatchers.jsonPath("userId").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("Successfully reset"));
+    }
 }
