@@ -8,9 +8,17 @@ import lombok.Setter;
 public class MovieRequest {
     private String name;
     private String genre;
+    private int placeId;
+
 
     public MovieRequest(String name, String genre){
         this.name = name;
         this.genre = genre;
+    }
+
+    public MovieRequest(String name, String genre, int placeId){
+        this.name = name;
+        this.genre = genre;
+        this.placeId = placeId;
     }
 }

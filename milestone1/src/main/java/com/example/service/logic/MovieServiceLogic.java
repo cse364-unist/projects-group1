@@ -67,7 +67,7 @@ public class MovieServiceLogic implements MovieService{
     @Override
     public List<MovieRequest> callMoviesByPlaceId(int placeId) {
         List<Movie> movies = movieStore.callByPlaceId(placeId);
-        List<MovieRequest> movieRequests = movies.stream().map(movie -> new MovieRequest(movie.getName(), movie.getGenre())).collect(Collectors.toList());
+        List<MovieRequest> movieRequests = movies.stream().map(movie -> new MovieRequest(movie.getName(), movie.getGenre(), movie.getPlaceId())).collect(Collectors.toList());
         return movieRequests;
     }
 }
