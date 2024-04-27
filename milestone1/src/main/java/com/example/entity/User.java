@@ -31,7 +31,7 @@ public class User {
     private int favoriteFood; //5개 비트 순서당 - 한식, 중식, 일식, 디저트, 베트남
     private double latitude;
     private double longitude;
-    private Map<Integer, Integer> quizzes; //quizId, quiz 푼 여부. 0일 시 풀지 않음, 1일 시 정답, 2일 시 오답
+    private Map<Integer, Integer> quizzes; //quizId, quiz 푼 여부. 1일 시 정답, 2일 시 오답
 
     public Map<Integer, Integer> getQuizzes() {
         if (quizzes == null) {
