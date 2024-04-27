@@ -40,7 +40,6 @@ public class User {
         return quizzes;
     }
 
-
     public User(int userId, String gender, int age, int occupation, String zipCode, int point, int movieStatus, int partyRoomStatus, int hobby, int favoriteFood, double latitude, double longitude, Map<Integer, Integer> quizzes){
         this.userId = userId;
         this.gender = gender;
@@ -56,5 +55,4 @@ public class User {
         this.longitude = longitude;
         this.quizzes = Objects.requireNonNullElseGet(quizzes, HashMap::new);
     }
-
 }

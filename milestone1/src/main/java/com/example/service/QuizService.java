@@ -2,12 +2,13 @@ package com.example.service;
 
 import com.example.entity.Quiz;
 import com.example.entity.cdo.QuizRequest;
-import org.springframework.stereotype.Service;
+import com.example.entity.cdo.UserRequest;
 
-@Service
+
 public interface QuizService {
 
     Quiz callQuizById(int quizId);
 
     int checkQuizAnswer(QuizRequest newQuizRequest, int quizId);
+    boolean resetQuizStatus(UserRequest newQuizResetRequest, int quizId);
 }

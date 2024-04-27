@@ -3,6 +3,7 @@ package com.example.service.logic;
 import com.example.entity.Quiz;
 import com.example.entity.User;
 import com.example.entity.cdo.QuizRequest;
+import com.example.entity.cdo.UserRequest;
 import com.example.service.QuizService;
 import com.example.store.QuizStore;
 import com.example.store.UserStore;
@@ -40,6 +41,19 @@ public class QuizServiceLogic implements QuizService{
             user.getQuizzes().put(quizId, 2);
             userStore.update(user);
             return 2;
+        }
+    }
+
+    @Override
+    public boolean resetQuizStatus(UserRequest newUserRequest, int quizId) {
+        User user = userStore.callByUserId(newUserRequest.getUserId());
+        if (user.getQuizzes().containsKey(quizId)) {
+            user.getQuizzes().remove(quizId);
+            userStore.update(user);
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }

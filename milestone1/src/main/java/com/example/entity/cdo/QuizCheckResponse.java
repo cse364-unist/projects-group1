@@ -9,5 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class QuizCheckResponse {
     private int quizId;
+    private int userId;
     private String resultMessage;
 }
