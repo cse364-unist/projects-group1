@@ -1,16 +1,16 @@
 package com.example.entity.cdo;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class UserRequest {
     private int userId;
-    private int point;
 
-    public UserRequest(int userId, int point){
+    public UserRequest(int userId){
         this.userId = userId;
-        this.point = point;
     }
 }

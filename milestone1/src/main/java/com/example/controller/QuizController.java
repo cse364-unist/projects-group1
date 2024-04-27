@@ -2,12 +2,12 @@ package com.example.controller;
 
 import com.example.entity.Quiz;
 import com.example.entity.Movie;
-import com.example.entity.cdo.QuizRequest;
-import com.example.entity.cdo.QuizCheckResponse;
+import com.example.entity.User;
+import com.example.entity.cdo.*;
 import com.example.service.MovieService;
 import com.example.service.UserService;
 import com.example.service.QuizService;
-import com.example.entity.cdo.QuizResponse;
+import com.example.store.UserStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,24 +39,32 @@ public class QuizController {
     @PostMapping("/{quizId}")
     public QuizCheckResponse checkAnswer(@RequestBody QuizRequest quizRequest, @PathVariable int quizId){
         int rightAnswer = quizService.checkQuizAnswer(quizRequest, quizId);
+        QuizCheckResponse quizCheckResponse = new QuizCheckResponse();
+        quizCheckResponse.setQuizId(quizId);
+        quizCheckResponse.setUserId(quizRequest.getUserId());
         if (rightAnswer == 1) {
-            QuizCheckResponse quizCheckResponse = new QuizCheckResponse();
-            quizCheckResponse.setQuizId(quizId);
             quizCheckResponse.setResultMessage("Correct Answer!");
-            return quizCheckResponse;
         }
         else if (rightAnswer == 2) {
-            QuizCheckResponse quizCheckResponse = new QuizCheckResponse();
-            quizCheckResponse.setQuizId(quizId);
             quizCheckResponse.setResultMessage("Wrong Answer!");
-            return quizCheckResponse;
         }
         else {
-            QuizCheckResponse quizCheckResponse = new QuizCheckResponse();
-            quizCheckResponse.setQuizId(quizId);
             quizCheckResponse.setResultMessage("You've already answered this quiz");
-            return quizCheckResponse;
         }
-
+        return quizCheckResponse;
+    }
+    @PostMapping("/reset/{quizId}")
+    public QuizCheckResponse resetStatus(@RequestBody UserRequest userRequest, @PathVariable int quizId) {
+        boolean resetStatus = quizService.resetQuizStatus(userRequest, quizId);
+        QuizCheckResponse quizCheckResponse = new QuizCheckResponse();
+        quizCheckResponse.setQuizId(quizId);
+        quizCheckResponse.setUserId(userRequest.getUserId());
+        if (resetStatus) {
+            quizCheckResponse.setResultMessage("Successfully reset");
+        }
+        else {
+            quizCheckResponse.setResultMessage("No data for requested quiz and user");
+        }
+        return quizCheckResponse;
     }
 }
