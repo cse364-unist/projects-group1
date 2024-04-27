@@ -16,42 +16,82 @@ public class QuizControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void testPostQuizCorrectAnswer() throws Exception {
-        // JSON 요청 본문
-        String jsonRequestBody = "{\"userId\":2,\"userAnswer\":1}";
+    public void testPostQuizRightAndReset() throws Exception {
+        //Reset user 2's quiz 4 status
+        String jsonRequestBody1 = "{\"userId\":2}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/reset/4")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequestBody1))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(4))
+                .andExpect(MockMvcResultMatchers.jsonPath("userId").value(2));
 
+        //Test for reset quiz status: no data for reset
+        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/reset/4")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequestBody1))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(4))
+                .andExpect(MockMvcResultMatchers.jsonPath("userId").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("No data for requested quiz and user"));
+
+        //Test for correct answer
+        String jsonRequestBody2 = "{\"userId\":2,\"userAnswer\":1}";
         mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/4")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonRequestBody))
+                        .content(jsonRequestBody2))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                // 추가적으로 응답 본문의 검증도 가능
                 .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(4))
                 .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("Correct Answer!"));
-    }
-    @Test
-    public void testPostQuizWrongAnswer() throws Exception {
-        // JSON 요청 본문
-        String jsonRequestBody = "{\"userId\":2,\"userAnswer\":2}";
 
+        //Test for reset quiz status: successfully reset
+        String jsonRequestBody3 = "{\"userId\":2}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/reset/4")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequestBody3))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(4))
+                .andExpect(MockMvcResultMatchers.jsonPath("userId").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("Successfully reset"));
+    }
+
+    @Test
+    public void testPostQuizWrongAndReset() throws Exception {
+        //Reset user 2's quiz 9 status
+        String jsonRequestBody1 = "{\"userId\":2}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/reset/9")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequestBody1))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(9))
+                .andExpect(MockMvcResultMatchers.jsonPath("userId").value(2));
+
+        //Test for reset quiz status: no data for reset
+        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/reset/9")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequestBody1))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(9))
+                .andExpect(MockMvcResultMatchers.jsonPath("userId").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("No data for requested quiz and user"));
+
+        //Test for wrong answer
+        String jsonRequestBody2 = "{\"userId\":2,\"userAnswer\":2}";
         mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/9")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonRequestBody))
+                        .content(jsonRequestBody2))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                // 추가적으로 응답 본문의 검증도 가능
                 .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(9))
                 .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("Wrong Answer!"));
-    }
-    @Test
-    public void testPostQuizAlreadySolved() throws Exception {
-        // JSON 요청 본문
-        String jsonRequestBody = "{\"userId\":2,\"userAnswer\":1}";
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/4")
+        //Test for reset quiz status: successfully reset
+        String jsonRequestBody3 = "{\"userId\":2}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/reset/9")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonRequestBody))
+                        .content(jsonRequestBody3))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                // 추가적으로 응답 본문의 검증도 가능
-                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(4))
-                .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("You already solved this quiz"));
+                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(9))
+                .andExpect(MockMvcResultMatchers.jsonPath("userId").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("Successfully reset"));
     }
 }
