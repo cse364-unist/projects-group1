@@ -1,11 +1,14 @@
 package com.example.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-@Data
+@Getter
+@Setter
 @Document(collection = "quiz")
 @NoArgsConstructor
 public class Quiz {

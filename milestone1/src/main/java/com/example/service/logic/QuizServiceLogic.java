@@ -27,9 +27,7 @@ public class QuizServiceLogic implements QuizService{
     public int checkQuizAnswer(QuizRequest newQuizRequest, int quizId) {
         User user = userStore.callByUserId(newQuizRequest.getUserId());
         if (user.getQuizzes().containsKey(quizId)) {
-            if (user.getQuizzes().get(quizId) != 0) {
-                return 0;
-            }
+            return 0;
         }
         if (quizStore.callByQuizId(quizId).getQuizAnswer() == newQuizRequest.getUserAnswer()) {
             user.setPoint(user.getPoint() + 10);
