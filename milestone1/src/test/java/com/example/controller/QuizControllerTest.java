@@ -16,6 +16,21 @@ public class QuizControllerTest {
     private MockMvc mockMvc;
 
     @Test
+    public void testGetQuiz() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/quizzes/4"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("movieId").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("movieName").value("Jumanji (1995)"))
+                .andExpect(MockMvcResultMatchers.jsonPath("quizNum").value(1))
+                .andExpect(MockMvcResultMatchers.jsonPath("quizBody").value("movie2 quiz1 Body"));
+    }
+    @Test
+    public void testGetQuizFail() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/quizzes/-6"))
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
     public void testPostQuizRightAndReset() throws Exception {
         //Reset user 2's quiz 4 status
         String jsonRequestBody1 = "{\"userId\":2}";
