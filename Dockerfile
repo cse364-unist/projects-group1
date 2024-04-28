@@ -25,10 +25,11 @@ RUN chown -R mongodb:mongodb /data/db /data/configdb
 
 # Add your stuff below:
 RUN apt-get update \
-    && apt-get install -y vim maven openjdk-17-jdk curl\
+    && apt-get install -y vim maven openjdk-17-jdk curl git\
     && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /root/project
-COPY milestone1/ /root/project/milestone1
-COPY ["run.sh", "."]
+COPY run.sh .
+RUN sed -i 's/\r$//' run.sh
 RUN chmod +x run.sh
 CMD ["/bin/bash"]
