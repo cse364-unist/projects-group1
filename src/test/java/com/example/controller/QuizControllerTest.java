@@ -148,4 +148,29 @@ public class QuizControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("userId").value(2))
                 .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("Successfully reset"));
     }
+
+    @Test
+    public void testPostQuizReset() throws Exception {
+        //Reset user 2's quiz 9 status
+        String jsonRequestBody1 = "{\"userId\":2}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/reset/9")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequestBody1))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(9))
+                .andExpect(MockMvcResultMatchers.jsonPath("userId").value(2));
+    }
+
+    @Test
+    public void testPostQuizResetFail() throws Exception {
+        //Reset user 2's quiz -3 status
+        String jsonRequestBody1 = "{\"userId\":2}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/quizzes/reset/-3")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonRequestBody1))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("quizId").value(-3))
+                .andExpect(MockMvcResultMatchers.jsonPath("userId").value(2))
+                .andExpect(MockMvcResultMatchers.jsonPath("resultMessage").value("No data for requested quiz and user"));
+    }
 }
