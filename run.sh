@@ -1,4 +1,6 @@
-cd milestone1
+git clone https://github.com/cse364-unist/projects-group1.git
+cd projects-group1/
+git checkout milestone2
 
 mongod --fork --logpath /var/log/mongodb.log
 mongosh admin --eval "db.createUser({ user: 'user', pwd: 'password', roles: ['userAdminAnyDatabase'] })"
@@ -14,5 +16,5 @@ mongoimport --db=assign1 --collection=quiz --authenticationDatabase admin --user
 
 #mvn test # JUnit 테스트 케이스들이 실행되어 각 테스트의 성공 여부를 결정. 이 단계는 테스트가 성공적으로 수행되었는지 확인
 mvn jacoco:report # JaCoCo는 Java 코드의 coverage를 측정하는 라이브러리, 이 명령어는 실행된 테스트를 기반으로 코드 커버리지 보고서를 생성
-mvn package # 여기 안에 test 포함이라 굳이 위에 따로 위에 안해도 ㄱㅊ
+mvn package # test 포함
 java -jar ./target/cse364-project-1.0-SNAPSHOT.jar
