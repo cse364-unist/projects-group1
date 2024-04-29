@@ -21,47 +21,9 @@ public class MovieServiceLogic implements MovieService{
     @Autowired
     MovieStore movieStore;
 
-    @Autowired
-    MongoTemplate mongoTemplate;
-
-    @Override
-    public int registerMovie(Movie newMovie) {
-        newMovie.setMovieId(findMaxMovieId()+1);
-        return movieStore.create(newMovie);
-    }
-
     @Override
     public Movie callMovieById(int movieId) {
         return movieStore.callById(movieId);
-    }
-    
-    @Override
-    public int findMaxMovieId() {
-        Aggregation aggregation = Aggregation.newAggregation(
-            Aggregation.sort(Sort.Direction.DESC, "movieId"),
-            Aggregation.limit(1)
-        );
-
-        AggregationResults<Movie> result = mongoTemplate.aggregate(aggregation, "movie", Movie.class);
-        Movie maxMovieIdMovie = result.getUniqueMappedResult();
-        return maxMovieIdMovie.getMovieId();
-    }
-
-    @Override
-    public void modifyMovie(MovieRequest newMovie, int movieId) {
-        Movie movie = movieStore.callById(movieId);
-        movie.setName(newMovie.getName());
-        movie.setGenre(newMovie.getGenre());
-        movieStore.update(movie);
-    }
-
-    @Override
-    public List<MovieRequest> callMoviesByAvg(List<Integer> movieIds) {
-        List<Movie> movies = movieStore.callByAvg(movieIds);
-
-        List<MovieRequest> movieRequests = movies.stream().map(movie -> new MovieRequest(movie.getName(), movie.getGenre())).collect(Collectors.toList());
-        
-        return movieRequests;
     }
 
     @Override

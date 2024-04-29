@@ -15,25 +15,12 @@ public class MovieStore {
     @Autowired
     MovieRepository movieRepository;
 
-    public int create(Movie newMovie){
-        movieRepository.save(newMovie);
-        return newMovie.getMovieId();
-    }
-
     public Movie callById(int movieId){
         Optional<Movie> movie = movieRepository.findByMovieId(movieId);
         if(!movie.isPresent()){
             throw new MovieNotFoundException(movieId);
         }
         return movie.get();
-    }
-
-    public void update(Movie newMovie){
-        movieRepository.save(newMovie);
-    }
-
-    public List<Movie> callByAvg(List<Integer> movieIds){
-        return movieRepository.findByMovieIdIn(movieIds);
     }
 
     public List<Movie> callByPlaceId(int placeId){
