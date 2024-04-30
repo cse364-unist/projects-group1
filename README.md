@@ -2,9 +2,11 @@
 
 ## Party Room Feature
 
-- **Feature Description**: The Party Room feature allows users to access functionalities related to hosting virtual movie parties. It includes endpoints for managing movie lists, creating/deleting content, and providing detailed movie information.
+- **Feature Description**: The Party Room feature allows users to access functionalities related to hosting virtual movie parties. It includes endpoints for managing movie lists, creating/deleting content, and providing detailed movie information. Here, "content" means additional content related to a movie made by a user.
 
 <img width="998" alt="스크린샷 2024-05-01 오전 12 58 44" src="https://github.com/cse364-unist/projects-group1/assets/99570746/95f7d03c-1f88-4a45-9525-195bff7ea737">
+
+This backend serves a party room application where users can browse and interact with various multimedia contents. At localhost:8080/partyroom, users can access different movies and other content types. Each movie and content item is accessible via unique endpoints that support operations like POST for content generation and DELETE for content removal. Additional features include live chat functionalities integrated via WebSockets at dynamic endpoints depending on the movie or content being accessed, enhancing real-time user interaction. For external access, media information is linked through imageurl.com with specific endpoints for each content.
 
 - **REST APIs**:
   - `GET /partyroom/movies`: Retrieves a list of randomly selected movies by genre.
