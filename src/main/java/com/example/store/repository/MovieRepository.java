@@ -9,8 +9,6 @@ import org.springframework.data.mongodb.repository.Query;
 import com.example.entity.Movie;
 
 public interface MovieRepository extends MongoRepository<Movie,String>{
-    @Query("{ 'movieId': { $in: ?0 } })")
-    List<Movie> findByMovieIdIn(List<Integer> movieIds);
     Optional<Movie> findByMovieId(int movieId);
     List<Movie> findByPlaceId(int placeId);
 }

@@ -131,7 +131,7 @@
     }
     ```
 - `GET /places/recommends/distance/{threshold}`
-  - **Description**: Recommends nearby filming locations based on the user's location.
+  - **Description**: Recommends nearby filming locations based on the user's location. The haversine formula is used to calculate the distance between each movie location and the user. At this time, latitude and longitude data of the user and the movie filming location are used. Returns movie locations with a distance less than the threshold.
   - **cURL Command**: `http://localhost:8080/places/recommends/distance/50?userId=1`
   - **Expected Output**:
     ```json
@@ -221,7 +221,7 @@
     ]
     ```
 - `GET /places/recommends/{userId}`
-  - **Description**: Retrieves the top 5 recommended movie filming locations based on the user's location.
+  - **Description**: Retrieves the top 5 recommended movie filming locations based on the user's location. hobby and favoriteFood are int type and express what kind of play and food the user likes through bit units. For example, 10010 (18) means having a hobby corresponding to the first bit and a hobby corresponding to the fourth bit. Therefore, the Hamming distance, which represents the distance between bits, is used to calculate the distance between the movie location's (hobby and favorite food) and the user's (hobby and favorite) food data to recommend the movie locations.
   - **cURL Command**: `curl -X GET http://localhost:8080/places/recommends/1`
   - **Expected Output**:
     ```json
