@@ -71,6 +71,33 @@ public class Feature01_PartyRoom_ControllerTest {
         assertEquals(3, distinctGenres.size()); // 확인: 장르가 모두 다른가?
     }
 
+    @Test
+    public void getMoviesByGenres_ReturnsNoContentWhenNull() {
+        // given
+        when(partyRoomService.findRandomTop3Movies()).thenReturn(null);
+
+        // when
+        ResponseEntity<List<Movie>> response = controller.getMoviesByGenres();
+
+        // then
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        assertTrue(response.getBody().isEmpty()); // 반환된 몸체가 비어 있는지 확인
+    }
+
+    @Test
+    public void getMoviesByGenres_ReturnsNoContentWhenEmptyList() {
+        // given
+        List<Movie> emptyList = Collections.emptyList();
+        when(partyRoomService.findRandomTop3Movies()).thenReturn(emptyList);
+
+        // when
+        ResponseEntity<List<Movie>> response = controller.getMoviesByGenres();
+
+        // then
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+        assertTrue(response.getBody().isEmpty()); // 반환된 몸체가 비어 있는지 확인
+    }
+
 
     // 2번 테스트 - 올바른 입력이 주어졌을 때, 제대로된 URL을 반환하는지 확인 + 잘못된 입력이 주어졌을 때, bad request을 반환하는지 확인
     //(통과) 2-1번 -> response랑 맞는지 확인
