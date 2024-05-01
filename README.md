@@ -2,7 +2,12 @@
 
 ## Party Room Feature
 
-- **Feature Description**: The Party Room feature allows users to access functionalities related to hosting virtual movie parties. It includes endpoints for managing movie lists, creating/deleting content, and providing detailed movie information.
+- **Feature Description**: The Party Room feature allows users to access functionalities related to hosting virtual movie parties. It includes endpoints for managing movie lists, creating/deleting content, and providing detailed movie information. Here, "content" means additional content related to a movie made by a user.
+
+<img width="998" alt="스크린샷 2024-05-01 오전 12 58 44" src="https://github.com/cse364-unist/projects-group1/assets/99570746/95f7d03c-1f88-4a45-9525-195bff7ea737">
+
+This backend serves a party room application where users can browse and interact with various multimedia contents. At localhost:8080/partyroom, users can access different movies and other content types. Each movie and content item is accessible via unique endpoints that support operations like POST for content generation and DELETE for content removal. Additional features include live chat functionalities integrated via WebSockets at dynamic endpoints depending on the movie or content being accessed, enhancing real-time user interaction. For external access, media information is linked through imageurl.com with specific endpoints for each content.
+
 - **REST APIs**:
   - `GET /partyroom/movies`: Retrieves a list of randomly selected movies by genre.
   - `POST /partyroom/contents`: Creates new content for the party room.
@@ -34,7 +39,7 @@
 # Example cURL Commands & Expected Outputs
 ## Party Room Feature
 - `GET /partyroom/movies`
-  - **Description**: Retrieves a list of randomly selected movies by genre.
+  - **Description**: Retrieves a list of randomly selected movies by distinic genre.
   - **cURL Command**: `curl -X GET http://localhost:8080/partyroom/movies`
   - **Expected Output**:
     ```json
@@ -68,12 +73,18 @@
 - `POST /partyroom/contents`
   - **Description**: Creates new content for the party room.
   - **cURL Command**: `curl -X POST http://localhost:8080/partyroom/contents -d "{\"contentName\": \"newContent\"}" -H "Content-Type: application/json"`
+  - **cURL Command**: `curl -X POST http://localhost:8080/partyroom/contents -d "{\"contentName\": \"newContent2\"}" -H "Content-Type: application/json"`
   - **Expected Output**:
     ```json
     {
       "id":"662e5183b8993c2b4e63fc99",
       "name":"newContent",
       "url":"http://localhost:8080/contents/newContent"
+    },
+    {
+      "id":"6631e11f89480e7bad92563b",
+      "name":"newContent2",
+      "url":"http://localhost:8080/contents/newContent2"
     }
     ```
 - `GET /partyroom/contents`
@@ -86,6 +97,11 @@
         "id":"662e5183b8993c2b4e63fc99",
         "name":"newContent",
         "url":"http://localhost:8080/contents/newContent"
+      },
+      {
+        "id":"6631e11f89480e7bad92563b",
+        "name":"newContent2",
+        "url":"http://localhost:8080/contents/newContent2"
       },
       ...
     ]
@@ -111,9 +127,9 @@
   - **Expected Output**:
   ```json
   {
-    "chatUrl": "ws://localhost:8080/partyroom/chat/newContent",
-    "streamVideoUrl": "http://videostreaming.com/partyroom/newContent",
-    "contentName": "newContent"
+    "chatUrl": "ws://localhost:8080/partyroom/chat/newContent2",
+    "streamVideoUrl": "http://videostreaming.com/partyroom/newContent2",
+    "contentName": "newContent2"
   }
   ```
 
@@ -132,7 +148,7 @@
     ```
 - `GET /places/recommends/distance/{threshold}`
   - **Description**: Recommends nearby filming locations based on the user's location. The haversine formula is used to calculate the distance between each movie location and the user. At this time, latitude and longitude data of the user and the movie filming location are used. Returns movie locations with a distance less than the threshold.
-  - **cURL Command**: `http://localhost:8080/places/recommends/distance/50?userId=1`
+  - **cURL Command**: `curl -X GET http://localhost:8080/places/recommends/distance/50\?userId\=1`
   - **Expected Output**:
     ```json
     [
