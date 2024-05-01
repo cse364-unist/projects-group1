@@ -137,7 +137,7 @@ This backend serves a party room application where users can browse and interact
     ```
 - `GET /places/recommends/distance/{threshold}`
   - **Description**: Recommends nearby filming locations based on the user's location. The haversine formula is used to calculate the distance between each movie location and the user. At this time, latitude and longitude data of the user and the movie filming location are used. Returns movie locations with a distance less than the threshold.
-  - **cURL Command**: `http://localhost:8080/places/recommends/distance/50?userId=1`
+  - **cURL Command**: `curl -X GET http://localhost:8080/places/recommends/distance/50\?userId\=1`
   - **Expected Output**:
     ```json
     [
