@@ -1,4 +1,18 @@
 $(document).ready(function() {
+    const hobbies = ['Tourism', 'Leisure', 'Cafe', 'Nature', 'Recreation'];
+    const favoriteFoods = ['Korean food', 'Chinese food', 'Japanese food', 'Western food', 'Dessert'];
+
+    // Function to convert bitwise number to human-readable strings
+    function bitwiseToReadable(bits, labels) {
+        let result = [];
+        for (let i = 0; i < labels.length; i++) {
+            if (bits & (1 << i)) {
+                result.push(labels[i]);
+            }
+        }
+        return result.join(' and ');
+    }
+
     // Find recommendations based on distance
     $('#findLocations').click(function() {
         const km = $('#km').val();
@@ -21,7 +35,9 @@ $(document).ready(function() {
         $.get(`/places/recommends/${userId}`, function(data) {
             $('#preferenceRecommendationList').empty();
             data.forEach(function(location) {
-                $('#preferenceRecommendationList').append('<li>' + location.name + ' - Hobby: ' + location.hobby + ', Favorite Food: ' + location.favoriteFood + '</li>');
+                const hobbiesReadable = bitwiseToReadable(location.hobby, hobbies);
+                const favoriteFoodsReadable = bitwiseToReadable(location.favoriteFood, favoriteFoods);
+                $('#preferenceRecommendationList').append('<li>' + location.name + ' - Hobby: ' + hobbiesReadable + ', Favorite Food: ' + favoriteFoodsReadable + '</li>');
             });
         }).fail(function() {
             console.error('Failed to load user preference-based recommendations');
