@@ -27,8 +27,8 @@ public class User {
     private int point;
     private int movieStatus;
     private boolean partyRoomStatus;
-    private int hobby; //5개 비트 순서당 -관람, 레저, 카페, 자연, ?  
-    private int favoriteFood; //5개 비트 순서당 - 한식, 중식, 일식, 디저트, 베트남
+    private int hobby; //5개 비트 순서당 -관람, 레저, 카페, 자연, 휴양
+    private int favoriteFood; //5개 비트 순서당 - 한식, 중식, 일식, 양식, 디저트
     private double latitude;
     private double longitude;
     private Map<Integer, Integer> quizzes; //quizId, quiz 푼 여부. 1일 시 정답, 2일 시 오답

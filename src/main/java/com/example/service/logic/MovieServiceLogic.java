@@ -32,4 +32,10 @@ public class MovieServiceLogic implements MovieService{
         List<MovieRequest> movieRequests = movies.stream().map(movie -> new MovieRequest(movie.getName(), movie.getGenre(), movie.getPlaceId())).collect(Collectors.toList());
         return movieRequests;
     }
+
+    @Override
+    public List<Movie> getAllMovies() {
+        return movieStore.getAllMovies();
+    }
+
 }

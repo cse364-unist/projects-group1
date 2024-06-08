@@ -26,4 +26,8 @@ public class MovieStore {
     public List<Movie> callByPlaceId(int placeId){
         return movieRepository.findByPlaceId(placeId);
     }
+
+    public List<Movie> getAllMovies(){
+        return movieRepository.findAll();
+    }
 }
