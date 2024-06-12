@@ -39,7 +39,7 @@ This backend serves a party room application where users can browse and interact
 # Example cURL Commands & Expected Outputs
 ## Party Room Feature
 - `GET /partyroom/movies`
-  - **Description**: Retrieves a list of randomly selected movies by genre.
+  - **Description**: Retrieves a list of randomly selected movies by distinic genre.
   - **cURL Command**: `curl -X GET http://localhost:8080/partyroom/movies`
   - **Expected Output**:
     ```json
@@ -73,12 +73,18 @@ This backend serves a party room application where users can browse and interact
 - `POST /partyroom/contents`
   - **Description**: Creates new content for the party room.
   - **cURL Command**: `curl -X POST http://localhost:8080/partyroom/contents -d "{\"contentName\": \"newContent\"}" -H "Content-Type: application/json"`
+  - **cURL Command**: `curl -X POST http://localhost:8080/partyroom/contents -d "{\"contentName\": \"newContent2\"}" -H "Content-Type: application/json"`
   - **Expected Output**:
     ```json
     {
       "id":"662e5183b8993c2b4e63fc99",
       "name":"newContent",
       "url":"http://localhost:8080/contents/newContent"
+    },
+    {
+      "id":"6631e11f89480e7bad92563b",
+      "name":"newContent2",
+      "url":"http://localhost:8080/contents/newContent2"
     }
     ```
 - `GET /partyroom/contents`
@@ -91,6 +97,11 @@ This backend serves a party room application where users can browse and interact
         "id":"662e5183b8993c2b4e63fc99",
         "name":"newContent",
         "url":"http://localhost:8080/contents/newContent"
+      },
+      {
+        "id":"6631e11f89480e7bad92563b",
+        "name":"newContent2",
+        "url":"http://localhost:8080/contents/newContent2"
       },
       ...
     ]
@@ -116,9 +127,9 @@ This backend serves a party room application where users can browse and interact
   - **Expected Output**:
   ```json
   {
-    "chatUrl": "ws://localhost:8080/partyroom/chat/newContent",
-    "streamVideoUrl": "http://videostreaming.com/partyroom/newContent",
-    "contentName": "newContent"
+    "chatUrl": "ws://localhost:8080/partyroom/chat/newContent2",
+    "streamVideoUrl": "http://videostreaming.com/partyroom/newContent2",
+    "contentName": "newContent2"
   }
   ```
 
