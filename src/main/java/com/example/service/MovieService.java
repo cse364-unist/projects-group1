@@ -8,4 +8,5 @@ import com.example.entity.cdo.MovieRequest;
 public interface MovieService {
     Movie callMovieById(int movieId);
     List<MovieRequest> callMoviesByPlaceId(int placeId);
+    List<Movie> getAllMovies();
 }

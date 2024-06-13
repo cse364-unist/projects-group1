@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/recommendation.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommend by User Information</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-title">FlickFriends</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recommendation.html">Get Recommendation</a></li>
+            <li><a href="locations.html">Explore Location</a></li>
+        </ul>
+    </nav>
+    <h1>Get Recommendation</h1>
+
+    <div>
+        <h2>Recommendations based on Distance</h2>
+        <label for="km">Threshold (km):</label>
+        <input type="number" id="km" name="km">
+        <button id="findLocations">Find Locations</button>
+        <ul id="distanceRecommendationList"></ul>
+    </div>
+
+    <div>
+        <h2>Top 5 Recommendations based on User Preferences</h2>
+        <button id="findUserPreferences">Find Recommendations</button>
+        <ul id="preferenceRecommendationList"></ul>
+    </div>
+</body>
+</html>

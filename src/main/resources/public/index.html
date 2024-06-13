@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/main.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlickFriends</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-title">FlickFriends</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recommendation.html">Get Recommendation</a></li>
+            <li><a href="locations.html">Explore Location</a></li>
+        </ul>
+    </nav>
+    <p>Select the movie you want to know about the filming location of</p>
+    <label for="movieList">Movie:</label>
+    <select id="movieList">
+        <option value="" disabled selected>Loading movies...</option>
+    </select>
+    <div id="movieInfo">
+        <h2>Filming Locations</h2>
+        <ul id="locationList"></ul>
+    </div>
+</body>
+</html>

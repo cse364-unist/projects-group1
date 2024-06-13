@@ -28,17 +28,18 @@ public class MoviePlaceController {
     @Autowired
     MoviePlaceService moviePlaceService;
 
+    @GetMapping("/movies")
+    public ResponseEntity<List<Movie>> findMovies() {
+        List<Movie> movies = movieService.getAllMovies();
+        return ResponseEntity.ok(movies);
+    }
+
     //해당 영화의 촬영지에 대한 정보 가져오기
     @GetMapping("/{movieId}")
-    public MoviePlaceResponse findMoviePlaceById(@PathVariable int movieId){
+    public ResponseEntity<MoviePlace> findMoviePlaceById(@PathVariable int movieId){
         Movie m = movieService.callMovieById(movieId);
         MoviePlace moviePlace = moviePlaceService.callMoviePlaceById(m.getPlaceId());
-        MoviePlaceResponse moviePlaceResponse = new MoviePlaceResponse();
-        moviePlaceResponse.setPlaceId(moviePlace.getPlaceId());
-        moviePlaceResponse.setName(moviePlace.getName());
-        moviePlaceResponse.setHobby(moviePlace.getHobby());
-        moviePlaceResponse.setFavoriteFood(moviePlace.getFavoriteFood());
-        return moviePlaceResponse;
+        return ResponseEntity.ok(moviePlace);
     }
 
     //해당 유저id를 통해 유저의 위치를 기반으로 가까운 장소에 있는 촬영지를 List로 반환 ->threshold는 유저가 원하는 km를 반영하기 위해 RequestParam으로 설정

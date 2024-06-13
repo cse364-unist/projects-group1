@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/locations.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlickFriends - Explore Location</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-title">FlickFriends</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="recommendation.html">Get Recommendation</a></li>
+                <li><a href="locations.html">Explore Location</a></li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Explore Location</h1>
+    <label for="locationList">Select a location:</label>
+    <select id="locationList">
+        <option value="" disabled selected>Select a location</option>
+    </select>
+    <div id="moviesAtLocation">
+        <h2>Movies at this location</h2>
+        <ul id="moviesList"></ul>
+    </div>
+</body>
+</html>
