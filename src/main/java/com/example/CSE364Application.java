@@ -7,13 +7,13 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 public class CSE364Application extends SpringBootServletInitializer {
-
-	public static void main(String[] args) {
-		SpringApplication.run(CSE364Application.class, args);
-	}
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(CSE364Application.class);
 	}
+	public static void main(String[] args) {
+		SpringApplication.run(CSE364Application.class, args);
+	}
+
 
 }

@@ -28,6 +28,10 @@ RUN apt-get update \
     && apt-get install -y vim maven openjdk-17-jdk curl git\
     && rm -rf /var/lib/apt/lists/*
 
+RUN wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.24/bin/apache-tomcat-10.1.24.tar.gz -O /tmp/tomcat.tar.gz
+RUN cd /tmp && tar xvfz tomcat.tar.gz
+RUN cp -Rv /tmp/apache-tomcat-9.0.14/* /root/project/tomcat
+
 WORKDIR /root/project
 COPY run.sh .
 RUN sed -i 's/\r$//' run.sh
