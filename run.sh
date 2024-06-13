@@ -19,4 +19,4 @@ mvn jacoco:report # JaCoCo는 Java 코드의 coverage를 측정하는 라이브�
 mvn clean package # test 포함
 cp target/cse364-project.war /root/project/tomcat/webapps
 cd /root/project/tomcat/bin
-./catalina.sh
+./catalina.sh run
