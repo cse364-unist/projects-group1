@@ -17,6 +17,7 @@ mongoimport --db=assign1 --collection=quiz --authenticationDatabase admin --user
 #mvn test # JUnit 테스트 케이스들이 실행되어 각 테스트의 성공 여부를 결정. 이 단계는 테스트가 성공적으로 수행되었는지 확인
 mvn jacoco:report # JaCoCo는 Java 코드의 coverage를 측정하는 라이브러리, 이 명령어는 실행된 테스트를 기반으로 코드 커버리지 보고서를 생성
 mvn clean package # test 포함
-cp target/cse364-project.war /root/project/tomcat/webapps
+rm -rf /root/project/tomcat/webappse/ROOT
+cp target/cse364-project.war /root/project/tomcat/webapps/ROOT.war
 cd /root/project/tomcat/bin
 ./catalina.sh run
