@@ -32,11 +32,12 @@ $(document).ready(function() {
         data.forEach(function(content) {
             const contentElement = $('<div class="content-box"></div>');
             
-            const contentName = $('<h3></h3>').text(content.name);
+            const contentName = $('<div class="content-name"></div>').text(content.name);
             contentElement.append(contentName);
 
-            const deleteButton = $('<button class="delete-button">&times;</button>');
-            deleteButton.on('click', function() {
+            const deleteButton = $('<button class="delete-button">DELETE</button>');
+            deleteButton.on('click', function(event) {
+                event.stopPropagation();
                 $.ajax({
                     url: `/partyroom/contents/${content.name}`,
                     type: 'DELETE',
@@ -50,7 +51,7 @@ $(document).ready(function() {
             });
             contentElement.append(deleteButton);
 
-            contentElement.on('click', function() {
+            contentName.on('click', function() {
                 window.location.href = content.url;
             });
 
@@ -75,11 +76,12 @@ $(document).ready(function() {
                     
                     const contentElement = $('<div class="content-box"></div>');
                     
-                    const contentName = $('<h3></h3>').text(newContent.name);
+                    const contentName = $('<div class="content-name"></div>').text(newContent.name);
                     contentElement.append(contentName);
 
-                    const deleteButton = $('<button class="delete-button">&times;</button>');
-                    deleteButton.on('click', function() {
+                    const deleteButton = $('<button class="delete-button">DELETE</button>');
+                    deleteButton.on('click', function(event) {
+                        event.stopPropagation();
                         $.ajax({
                             url: `/partyroom/contents/${newContent.name}`,
                             type: 'DELETE',
@@ -93,7 +95,7 @@ $(document).ready(function() {
                     });
                     contentElement.append(deleteButton);
 
-                    contentElement.on('click', function() {
+                    contentName.on('click', function() {
                         window.location.href = newContent.url;
                     });
 
