@@ -22,6 +22,20 @@ $(document).ready(function() {
             console.error('Error fetching details:', error);
             $('#title').text('Error loading details');
         });
+
+        // 퀴즈 버튼 클릭 이벤트 핸들러
+        $('#quiz-button').on('click', function() {
+            $.ajax({
+                url: `quiz.html`,
+                type: 'HEAD',
+                error: function() {
+                    alert('Quiz page is not available.');
+                },
+                success: function() {
+                    window.location.href = `quiz.html?id=${id}&type=${type}`;
+                }
+            });
+        });
     } else {
         $('#title').text('Invalid ID or type');
     }
