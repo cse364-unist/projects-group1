@@ -71,7 +71,7 @@ $(document).ready(function() {
                     alert('Quiz page is not available.');
                 },
                 success: function() {
-                    window.location.href = `quiz.html?id=${quizId}`;
+                    window.open(`quiz.html?id=${quizId}`);
                 }
             });
         });
