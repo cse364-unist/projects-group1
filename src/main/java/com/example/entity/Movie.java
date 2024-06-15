@@ -21,6 +21,7 @@ public class Movie {
     private String genre;
     private String url; // 파티룸 페이지 URL
     private int placeId; // 영화를 촬영한 장소 id
+    private String imageUrl; // 이미지 URL 필드 추가
 
     public Movie(int movieId, String name, String genre){
         this.movieId = movieId;

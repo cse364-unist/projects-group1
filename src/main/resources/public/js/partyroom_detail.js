@@ -21,7 +21,7 @@ $(document).ready(function() {
         // 영화나 콘텐츠 정보를 가져오기
         $.get(endpoint, function(data) {
             $('#title').text(type === 'movie' ? data.movieName : data.contentName);
-            $('#video').attr('src', data.streamVideoUrl); // 이미지 URL 설정
+            $('#video').attr('src', data.imageUrl); // 이미지 URL 설정
             $('#chat').attr('src', data.chatUrl);
 
             // type이 'movie'일 때 movieId를 저장, 그렇지 않으면 기존 id를 사용
