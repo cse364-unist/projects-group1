@@ -1,11 +1,10 @@
 $(document).ready(function() {
-    // Load all movies on page load
-    $.get('/cse364-project/partyroom/movies', function(data) {
+    $.get('/partyroom/movies', function(data) {
         const movieContainer = $('#movies');
         movieContainer.empty();
 
         data.forEach(function(movie) {
-            const movieElement = $('<div class="movie"></div>');
+            const movieElement = $('<div class="movie-box"></div>');
             
             const movieName = $('<h3></h3>').text(movie.name);
             movieElement.append(movieName);
