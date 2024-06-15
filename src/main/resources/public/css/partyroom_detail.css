@@ -27,6 +27,15 @@ body {
     margin-bottom: 20px;
 }
 
+#back-button {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #FFD700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
 #main-content {
     display: flex;
     justify-content: space-between;
