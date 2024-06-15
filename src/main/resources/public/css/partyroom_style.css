@@ -64,27 +64,32 @@ body {
 }
 
 .content-box {
+    display: flex;
     background-color: #FFA500;
     color: #fff;
-    padding: 20px;
     margin: 10px 0;
     border-radius: 8px;
-    text-align: center;
     font-size: 18px;
     font-weight: bold;
-    cursor: pointer;
-    position: relative;
 }
 
-.delete-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+.content-box .content-name {
+    flex: 80%;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.content-box .delete-button {
+    flex: 20%;
     background-color: red;
     color: white;
     border: none;
-    border-radius: 50%;
+    border-radius: 0 8px 8px 0;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .add-content {
