@@ -26,6 +26,36 @@ $(document).ready(function() {
 
             // type이 'movie'일 때 movieId를 저장, 그렇지 않으면 기존 id를 사용
             quizId = type === 'movie' ? data.movieId : id;
+
+            // 웹소켓 연결 설정
+            const socket = new SockJS('/ws');
+            const stompClient = Stomp.over(socket);
+
+            stompClient.connect({}, function(frame) {
+                console.log('Connected: ' + frame);
+
+                // 특정 채팅 방에 구독
+                stompClient.subscribe('/topic/public', function(messageOutput) {
+                    showMessageOutput(JSON.parse(messageOutput.body));
+                });
+
+                // 사용자 추가
+                stompClient.send("/app/chat.addUser", {}, JSON.stringify({sender: 'User', type: 'JOIN'}));
+
+                // 메시지 전송
+                $('#sendButton').click(function() {
+                    const messageContent = $('#messageInput').val();
+                    if (messageContent && stompClient) {
+                        const chatMessage = {
+                            sender: 'User',
+                            content: messageContent,
+                            type: 'CHAT'
+                        };
+                        stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
+                        $('#messageInput').val('');
+                    }
+                });
+            });
         })
         .fail(function(error) {
             console.error('Error fetching details:', error);
@@ -47,5 +77,11 @@ $(document).ready(function() {
         });
     } else {
         $('#title').text('Invalid ID or type');
+    }
+
+    function showMessageOutput(messageOutput) {
+        const chat = $('#chat');
+        const messageElement = $('<div>').text(messageOutput.sender + ': ' + messageOutput.content);
+        chat.append(messageElement);
     }
 });
