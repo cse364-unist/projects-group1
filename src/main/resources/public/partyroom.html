@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Party Room</title>
+    <link rel="stylesheet" href="/css/partyroom_style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-title">FlickFriends Party Room</div>
+        <ul class="nav-links">
+            <li><a href="partyroom.html">Movie List</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div id="movies">
+            <!-- Movies will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="add-content">
+            <h2>Add New Content</h2>
+            <input type="text" id="contentName" placeholder="Enter content name">
+            <button id="addContentButton">Add Content</button>
+        </div>
+        
+        <div id="contents">
+            <!-- Contents will be inserted here by JavaScript -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/partyroom.js"></script>
+</body>
+</html>
