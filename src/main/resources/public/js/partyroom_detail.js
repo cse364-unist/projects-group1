@@ -13,7 +13,6 @@ $(document).ready(function() {
     // 영화나 콘텐츠 ID를 URL에서 가져오기
     const id = getParameterByName('id');
     const type = getParameterByName('type'); // 'movie' 또는 'content'
-    let quizId;
 
     if (id && type) {
         const endpoint = type === 'movie' ? `/partyroom/movies/${id}` : `/partyroom/contents/${id}`;
@@ -23,9 +22,6 @@ $(document).ready(function() {
             $('#title').text(type === 'movie' ? data.movieName : data.contentName);
             $('#video').attr('src', data.imageUrl); // 이미지 URL 설정
             $('#chat').attr('src', data.chatUrl);
-
-            // type이 'movie'일 때 movieId를 저장, 그렇지 않으면 기존 id를 사용
-            quizId = type === 'movie' ? data.movieId : id;
 
             // 웹소켓 연결 설정
             const socket = new SockJS('/ws');
@@ -63,7 +59,7 @@ $(document).ready(function() {
         });
 
         // 퀴즈 버튼 클릭 이벤트 핸들러
-        $('#quiz-button').on('click', function() {
+        $('#quiz-button1').on('click', function() {
             $.ajax({
                 url: `quiz.html`,
                 type: 'HEAD',
@@ -71,7 +67,34 @@ $(document).ready(function() {
                     alert('Quiz page is not available.');
                 },
                 success: function() {
-                    window.location.href = `quiz.html?id=${quizId}`;
+                    quizId = (id-1) * 3 + 1;
+                    window.open(`quiz.html?id=${quizId}`);
+                }
+            });
+        });
+        $('#quiz-button2').on('click', function() {
+            $.ajax({
+                url: `quiz.html`,
+                type: 'HEAD',
+                error: function() {
+                    alert('Quiz page is not available.');
+                },
+                success: function() {
+                    quizId = (id-1) * 3 + 2;
+                    window.open(`quiz.html?id=${quizId}`);
+                }
+            });
+        });
+        $('#quiz-button3').on('click', function() {
+            $.ajax({
+                url: `quiz.html`,
+                type: 'HEAD',
+                error: function() {
+                    alert('Quiz page is not available.');
+                },
+                success: function() {
+                    quizId = (id-1) * 3 + 3;
+                    window.open(`quiz.html?id=${quizId}`);
                 }
             });
         });
