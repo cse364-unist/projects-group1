@@ -6,15 +6,15 @@ $(document).ready(function() {
 
         data.forEach(function(movie) {
             const movieElement = $('<div class="movie-box"></div>');
-            
+
             const movieName = $('<h3></h3>').text(movie.name);
             movieElement.append(movieName);
-            
+
             const movieGenre = $('<p></p>').text(`Genre: ${movie.genre}`);
             movieElement.append(movieGenre);
 
             movieElement.on('click', function() {
-                window.location.href = movie.url;
+                window.location.href = `partyroom_detail.html?id=${movie.movieId}&type=movie`;
             });
 
             movieContainer.append(movieElement);
@@ -31,7 +31,7 @@ $(document).ready(function() {
 
         data.forEach(function(content) {
             const contentElement = $('<div class="content-box"></div>');
-            
+
             const contentName = $('<div class="content-name"></div>').text(content.name);
             contentElement.append(contentName);
 
@@ -52,7 +52,7 @@ $(document).ready(function() {
             contentElement.append(deleteButton);
 
             contentName.on('click', function() {
-                window.location.href = content.url;
+                window.location.href = `partyroom_detail.html?id=${content.name}&type=content`;
             });
 
             contentContainer.append(contentElement);
@@ -73,9 +73,9 @@ $(document).ready(function() {
                 data: JSON.stringify({ contentName: contentName }),
                 success: function(newContent) {
                     const contentContainer = $('#contents');
-                    
+
                     const contentElement = $('<div class="content-box"></div>');
-                    
+
                     const contentName = $('<div class="content-name"></div>').text(newContent.name);
                     contentElement.append(contentName);
 
@@ -96,7 +96,7 @@ $(document).ready(function() {
                     contentElement.append(deleteButton);
 
                     contentName.on('click', function() {
-                        window.location.href = newContent.url;
+                        window.location.href = `partyroom_detail.html?id=${newContent.name}&type=content`;
                     });
 
                     contentContainer.append(contentElement);
