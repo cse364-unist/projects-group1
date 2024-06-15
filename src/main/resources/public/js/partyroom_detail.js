@@ -1,4 +1,9 @@
 $(document).ready(function() {
+    // 뒤로가기 버튼 클릭 이벤트 핸들러
+    $('#back-button').on('click', function() {
+        window.history.back();
+    });
+
     // URL에서 파라미터를 가져오는 함수
     function getParameterByName(name) {
         const url = new URL(window.location.href);
@@ -15,7 +20,7 @@ $(document).ready(function() {
         // 영화나 콘텐츠 정보를 가져오기
         $.get(endpoint, function(data) {
             $('#title').text(type === 'movie' ? data.movieName : data.contentName);
-            $('#video').attr('src', data.streamVideoUrl);
+            $('#video').attr('src', data.streamVideoUrl); // 이미지 URL 설정
             $('#chat').attr('src', data.chatUrl);
         })
         .fail(function(error) {
