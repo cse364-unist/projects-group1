@@ -19,8 +19,21 @@ body {
     text-align: center;
 }
 
+.title-box {
+    background-color: #D7006A;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#main-content {
+    display: flex;
+    justify-content: space-between;
+}
+
 #video-container {
-    margin: 20px 0;
+    width: 70%;
 }
 
 #video {
@@ -31,11 +44,12 @@ body {
 }
 
 #chat-container {
-    margin: 20px 0;
+    width: 30%;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
 }
 
 #chat {
@@ -43,4 +57,12 @@ body {
     height: 300px;
     border: none;
     border-radius: 8px;
+}
+
+#quiz-container {
+    margin-top: 20px;
+    background-color: #FFD700;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
