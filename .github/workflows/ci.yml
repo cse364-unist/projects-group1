@@ -20,5 +20,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+      - name: MongoDB in GitHub Actions
+        uses: supercharge/mongodb-github-action@1.11.0
       - name: Build and Run all the test with Maven
         run: mvn clean package
