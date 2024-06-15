@@ -99,11 +99,13 @@ public class Feature01_PartyRoom_Controller {
         if (movie == null) {
             return ResponseEntity.badRequest().build();
         }
+        movie.setImageUrl("http://localhost:8080/images/" + String.valueOf(movieId) + ".jpg");
 
         // Construct response
         HashMap<String, String> response = new HashMap<>();
         response.put("movieName", movie.getName()); // => front end
         response.put("streamVideoUrl", "http://videostreaming.com/partyroom/" + String.valueOf(movieId)); // => frontend 구현 부분
+        response.put("imageUrl", "http://localhost:8080/images/" + String.valueOf(movieId) + ".jpg"); // => frontend 구현 부분
         response.put("chatUrl", "ws://localhost:8080/partyroom/chat/" + String.valueOf(movieId)); // => frontend 구현 부분
 
         return ResponseEntity.ok(response);
