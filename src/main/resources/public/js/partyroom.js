@@ -35,6 +35,21 @@ $(document).ready(function() {
             const contentName = $('<h3></h3>').text(content.name);
             contentElement.append(contentName);
 
+            const deleteButton = $('<button class="delete-button">&times;</button>');
+            deleteButton.on('click', function() {
+                $.ajax({
+                    url: `/partyroom/contents/${content.name}`,
+                    type: 'DELETE',
+                    success: function(result) {
+                        contentElement.remove();
+                    },
+                    error: function(error) {
+                        console.error('Error deleting content:', error);
+                    }
+                });
+            });
+            contentElement.append(deleteButton);
+
             contentElement.on('click', function() {
                 window.location.href = content.url;
             });
@@ -62,6 +77,21 @@ $(document).ready(function() {
                     
                     const contentName = $('<h3></h3>').text(newContent.name);
                     contentElement.append(contentName);
+
+                    const deleteButton = $('<button class="delete-button">&times;</button>');
+                    deleteButton.on('click', function() {
+                        $.ajax({
+                            url: `/partyroom/contents/${newContent.name}`,
+                            type: 'DELETE',
+                            success: function(result) {
+                                contentElement.remove();
+                            },
+                            error: function(error) {
+                                console.error('Error deleting content:', error);
+                            }
+                        });
+                    });
+                    contentElement.append(deleteButton);
 
                     contentElement.on('click', function() {
                         window.location.href = newContent.url;
