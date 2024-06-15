@@ -45,7 +45,7 @@ $(document).ready(function() {
                 // 메시지 전송
                 $('#sendButton').click(function() {
                     const messageContent = $('#messageInput').val();
-                    if(messageContent && stompClient) {
+                    if (messageContent && stompClient) {
                         const chatMessage = {
                             sender: 'User',
                             content: messageContent,
