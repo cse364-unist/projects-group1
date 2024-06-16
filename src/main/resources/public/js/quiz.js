@@ -10,9 +10,7 @@ $(document).ready(function() {
     userId = localStorage.getItem(idKey);
     if(userId==null){
         alert('You have to login first');
-        //여기부터 지워주세요
-        userId = 1;
-        //여기까지
+        window.location.href = 'login.html';
     }
     fetch(quizUrl)
         .then(response => {
