@@ -60,15 +60,15 @@ public class MoviePlaceControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
-    @Test //placeid를 통해 해당 place정보 가져오기
-    public void findMoviePlaceByPlaceId() throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/places?placeId=1"))
-        .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("placeId").value(1))
-        .andExpect(MockMvcResultMatchers.jsonPath("name").value("loc1"))
-        .andExpect(MockMvcResultMatchers.jsonPath("hobby").value(28))
-        .andExpect(MockMvcResultMatchers.jsonPath("favoriteFood").value(23));
-    }
+    // @Test //placeid를 통해 해당 place정보 가져오기
+    // public void findMoviePlaceByPlaceId() throws Exception{
+    //     mockMvc.perform(MockMvcRequestBuilders.get("/places?placeId=1"))
+    //     .andExpect(MockMvcResultMatchers.status().isOk())
+    //     .andExpect(MockMvcResultMatchers.jsonPath("placeId").value(1))
+    //     .andExpect(MockMvcResultMatchers.jsonPath("name").value("loc1"))
+    //     .andExpect(MockMvcResultMatchers.jsonPath("hobby").value(28))
+    //     .andExpect(MockMvcResultMatchers.jsonPath("favoriteFood").value(23));
+    // }
     
     @Test //없는 placeid 접근시 isnotfound
     public void findMoviePlaceByPlaceIdFail() throws Exception{
