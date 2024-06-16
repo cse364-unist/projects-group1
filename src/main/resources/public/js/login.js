@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
       localStorage.setItem(idKey, userId);
 
       alert('Logged in!');
-      window.history.back();
+      const previousPage = localStorage.getItem('previousPage');
+      window.location.href = previousPage;
   });
 });

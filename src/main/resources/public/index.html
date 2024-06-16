@@ -19,7 +19,8 @@
     </div>
 
     <!-- 클릭시 login.html로 이동 -->
-    <button onclick="location.href='login.html'">Login</button>
+    <script>localStorage.setItem('previousPage', window.location.href);</script>
+    <button onclick="window.location.href='login.html'">Login</button>
 
 </body>
 </html>

@@ -10,7 +10,7 @@ $(document).ready(function() {
     userId = localStorage.getItem(idKey);
     if(userId==null){
         alert('You have to login first');
-        location.href = 'login.html';
+        window.location.href = 'login.html';
     }
     fetch(quizUrl)
         .then(response => {
