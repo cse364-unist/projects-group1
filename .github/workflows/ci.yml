@@ -27,8 +27,5 @@ jobs:
         with:
           maven-version: 3.8.2
 
-      - name: MongoDB in GitHub Actions
-        uses: supercharge/mongodb-github-action@1.11.0
-
       - name: Build and run tests
         run: mvn clean package
