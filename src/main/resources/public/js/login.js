@@ -3,13 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const idKey = 'USER-ID';
 
   loginForm.addEventListener('submit', function(event) {
-      event.preventDefault();
+    event.preventDefault();
 
-      const userId = document.getElementById('user-id').value;
-      localStorage.setItem(idKey, userId);
+    const userId = document.getElementById('userId').value;
+    localStorage.setItem(idKey, userId);
 
-      alert('Logged in!');
-      const previousPage = localStorage.getItem('previousPage');
-      window.location.href = previousPage;
+    alert('Logged in!');
+    window.history.back();
   });
 });
