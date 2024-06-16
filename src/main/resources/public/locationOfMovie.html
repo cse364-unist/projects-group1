@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="js/locations.js"></script>
+<script src="js/main.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlickFriends - Explore Location</title>
+    <title>FlickFriends</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,14 +18,16 @@
         </ul>
     </nav>
 
-    <h1>Explore Location</h1>
-    <label for="locationList">Select a location:</label>
-    <select id="locationList">
-        <option value="" disabled selected>Select a location</option>
+    <h1>Location of Movie</h1>
+
+    <p>Select the movie you want to know about the filming location of</p>
+    <label for="movieList">Movie:</label>
+    <select id="movieList">
+        <option value="" disabled selected>Loading movies...</option>
     </select>
-    <div id="moviesAtLocation">
-        <h2>Movies at this location</h2>
-        <ul id="moviesList"></ul>
+    <div id="movieInfo">
+        <h2>Filming Locations</h2>
+        <ul id="locationList"></ul>
     </div>
 </body>
 </html>

@@ -9,22 +9,18 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-title">FlickFriends</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="recommendation.html">Get Recommendation</a></li>
-            <li><a href="locations.html">Explore Location</a></li>
-        </ul>
-    </nav>
-    <p>Select the movie you want to know about the filming location of</p>
-    <label for="movieList">Movie:</label>
-    <select id="movieList">
-        <option value="" disabled selected>Loading movies...</option>
-    </select>
-    <div id="movieInfo">
-        <h2>Filming Locations</h2>
-        <ul id="locationList"></ul>
+    <div style="text-align: center; margin-top: 50px;">
+        <h1>FlickFriends</h1>
+        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 30px;">
+            <button onclick="window.location.href='partyroom.html'" style="padding: 20px; background-color: #ADD8E6; border: none; border-radius: 10px;">Partyroom</button>
+            <button onclick="window.location.href='locationOfMovie.html'" style="padding: 20px; background-color: #FFD700; border: none; border-radius: 10px;">Location-Based Recommendation</button>
+            <button onclick="window.location.href='profile.html'" style="padding: 20px; background-color: #7094FF; border: none; border-radius: 10px;">User Profile</button>
+        </div>
     </div>
+
+    <!-- 클릭시 login.html로 이동 -->
+    <script>localStorage.setItem('previousPage', window.location.href);</script>
+    <button onclick="window.location.href='login.html'">Login</button>
+
 </body>
 </html>

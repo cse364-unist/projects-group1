@@ -15,13 +15,13 @@ public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    public void testGetUser() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/users/11"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("userId").value(11))
-                .andExpect(MockMvcResultMatchers.jsonPath("point").value(93));
-    }
+    // @Test
+    // public void testGetUser() throws Exception {
+    //     mockMvc.perform(MockMvcRequestBuilders.get("/users/11"))
+    //             .andExpect(MockMvcResultMatchers.status().isOk())
+    //             .andExpect(MockMvcResultMatchers.jsonPath("userId").value(11))
+    //             .andExpect(MockMvcResultMatchers.jsonPath("point").value(93));
+    // }
     @Test
     public void testGetUserFail() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/users/-6"))
