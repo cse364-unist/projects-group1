@@ -27,6 +27,5 @@ jobs:
       with:
         maven-version: 3.8.2
 
-    - name: Build and run tests
-      run: |
-        mvn clean package
+    - name: Build and Run Tests
+      run: mvn clean package
