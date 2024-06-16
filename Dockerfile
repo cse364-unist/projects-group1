@@ -34,6 +34,9 @@ WORKDIR /root/project
 RUN mkdir tomcat
 RUN cp -Rv /tmp/apache-tomcat-10.1.24/* /root/project/tomcat
 
+# Copy your-service.war file to the proper directory in Tomcat
+#COPY our-service.war /root/project/tomcat/webapps/
+
 WORKDIR /root/project
 COPY run.sh .
 RUN sed -i 's/\r$//' run.sh
