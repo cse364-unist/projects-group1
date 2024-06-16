@@ -34,8 +34,14 @@ WORKDIR /root/project
 RUN mkdir tomcat
 RUN cp -Rv /tmp/apache-tomcat-10.1.24/* /root/project/tomcat
 
+# Remove existing ROOT directory if it exists
+RUN rm -rf /root/project/tomcat/webapps/ROOT
+
+# Copy the WAR file to the Tomcat webapps directory
+COPY ROOT.war /root/project/tomcat/webapps/ROOT.war
+
 WORKDIR /root/project
 COPY run.sh .
 RUN sed -i 's/\r$//' run.sh
 RUN chmod +x run.sh
-CMD ["/bin/bash"]
+CMD ["./run.sh"]

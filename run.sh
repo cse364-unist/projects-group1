@@ -1,3 +1,5 @@
+#!/bin/bash
+
 git clone https://github.com/cse364-unist/projects-group1.git
 cd projects-group1/
 git checkout milestone3_Application
