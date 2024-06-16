@@ -2,7 +2,7 @@
 
 git clone https://github.com/cse364-unist/projects-group1.git
 cd projects-group1/
-git checkout milestone3_Application
+git checkout milestone3
 
 mongod --fork --logpath /var/log/mongodb.log
 mongosh admin --eval "db.createUser({ user: 'user', pwd: 'password', roles: ['userAdminAnyDatabase'] })"
