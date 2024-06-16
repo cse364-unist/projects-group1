@@ -75,14 +75,9 @@ cd /root/project/tomcat/bin
 ./catalina.sh run
 ```
 
-### Access-webpage
+### Access Webpage
 
-비워두자
-
-1. **Sign Up:** Create an account by providing your email and a password.
-2. **Log In:** Use your credentials to log in to the application.
-3. **Create a Task:** Navigate to the 'Create Task' section and enter the details of your task.
-4. **Manage Tasks:** View and manage your tasks from the dashboard.
+On the main page, you can access Partyroom, Location-Based Recommendation, Profile, and Login. As the User ID, you can use an integer from 1 to 4040 (because it fetches 4040 users from the database). In profile, you can check your logined User Id and logout.
 
 ## Features
 
