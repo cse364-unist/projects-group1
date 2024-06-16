@@ -7,14 +7,12 @@ Welcome to Flick Friends! Our product, called FlickFriends, is a new social netw
 1. [Introduction](#introduction)
 2. [Getting Started](#getting-started)
     - [Installation](#installation)
-    - [Access Webpage](#access-webpage)
+    - [Access Webpage](#Access-webpage)
 3. [Features](#features)
-    - [Party Room](#PartyRoom)
-    - [Quiz](#quiz)
-    - [Location based Recommendation](#location-based-recommendation)
-4. [Usage](#usage)
-5. [FAQ](#faq)
-6. [For Developers](#for-developers)
+    - [Party Room](#01.PartyRoom)
+    - [Quiz](#02.Quiz)
+    - [Location based Recommendation](#03.Location-based-recommendation)
+4. [For Developers](#for-developers)
     - [Contributing](#contributing)
 
 ## Introduction
@@ -77,7 +75,7 @@ cd /root/project/tomcat/bin
 ./catalina.sh run
 ```
 
-### access-webpage
+### Access-webpage
 
 비워두자
 
@@ -90,7 +88,7 @@ cd /root/project/tomcat/bin
 
 Our product comes with three key features to enhance your experience:
 
-### PartyRoom
+### 01.PartyRoom
 
 One of the key features of our proposed movie product is the "Party Room" functionality, inspired by services like Watcha and Naver-Vibe. This feature allows users to join virtual rooms created by a host to watch movies in real-time, enhancing community engagement. 
 
@@ -116,33 +114,53 @@ Each party room webpage includes live chat functionality and video streaming cap
 
 Finally, you can use the quiz system related to movies by pressing the quiz button at the bottom of the web page, which will be followed by the following features.
 
-### quiz
+### 02. Quiz
 
-This feature is an organically connected feature with the "Party Room". Our product focuses on creating a user-friendly movie streaming platform that emphasizes community engagement and enjoyment. One of the key features we're implementing is a point system designed to enhance user interaction and participation. Users will be able to stream movies together, regardless of their physical locations, and engage in activities like quizzes and reviews to earn points.
+This feature is organically connected with the "Party Room". Our product focuses on creating a user-friendly movie streaming platform that emphasizes community engagement and enjoyment. One of the key features we're implementing is a point system designed to enhance user interaction and participation. Users will be able to stream movies together, regardless of their physical locations, and engage in activities like quizzes and reviews to earn points.
 
-### location-based-recommendation
+#### Quiz Examples
+
+Below are examples of the quiz feature in action:
+
+- **Quiz Example:** This is a standard view of a quiz for the example movie "Magnum Force (1973)". Users can select their answers from the given options.
+
+![Quiz Example](images/quiz_example.png)
+
+- **Wrong Answer:** When a user selects the wrong answer, a message will appear indicating that the answer is incorrect.
+
+![Quiz Example Wrong Answer](images/quiz_example_wrong_A.png)
+
+- **Already Answered:** If a user tries to answer a quiz they have already completed, a message will notify them that they have already answered this quiz.
+
+![Quiz Example Already](images/quiz_example_already.png)
+
+These features are designed to make the viewing experience more interactive and engaging, encouraging users to participate in community activities and enhancing their overall experience on the platform.
 
 
-## Usage
+### 03.Location-Based-Recommendation
 
-Here’s a brief overview of how to use the main features of MyApplication:
+One of the features we need to implement is location-based-recommendation. This feature makes it easy to obtain information about movie filming locations and provides recommendations to users who want to travel to movie locations.
 
-### Creating a Task
+Direct access: You can access directly via http://locathost:8080/locationmain.html.
 
-1. Click on the "Create Task" button.
-2. Fill in the task details such as title, description, due date, and priority level.
-3. Click "Save" to add the task to your list.
+![Location Photo 01](images/location_photov01.png)
 
-### Managing Tasks
+First, you can select a movie from the list of movies on the 'locationmain' page. When you select a movie, information about the filming location of the movie will pop up below and you can check it.
 
-1. Navigate to the "Dashboard" to view your tasks.
-2. Click on a task to edit or delete it.
-3. Use the filters to view tasks by status, priority, or due date.
+![Location Photo 02](images/location_photov02.png)
 
-### Receiving Notifications
+If you click 'Get Recommendation' in the menu above, you can go to the page where you can receive recommendations for filming locations.
 
-1. Ensure that notifications are enabled in your settings.
-2. Receive reminders for tasks that are due soon or overdue.
+You can receive two recommendations. First, based on distance, enter the number next to the km next to the threshold of how far you are willing to go from your home location and click the 'Find Locations' button next to it to see shooting locations smaller than that distance.
+
+Next, you can receive recommendations based on your hobbies and food preferences. This can be viewed by pressing the 'Find Recommendations' button. Types of hobbies include:
+There are 5 categories: 'Tourism', 'Leisure', 'Cafe', 'Nature', and 'Recreation', and the foods include 'Korean food', 'Chinese food', 'Japanese food', 'Western food', and 'Dessert'. There are 5.
+
+![Location Photo 03](images/location_photov03.png)
+
+If you click 'Explore Location' in the menu above, you can see a list of movies by filming location.
+
+If you go to the explore location tab and select a filming location, you can see a list of movies filmed at that filming location. Just select the desired filming location from the list next to ‘Select a location’.
 
 ## FAQ
 
@@ -156,7 +174,7 @@ Currently, task sharing is not supported, but we are working on this feature for
 
 ## For Developers
 
-If you’re interested in contributing to MyApplication, here’s how you can get started.
+If you’re interested in contributing to our product, here’s how you can get started.
 
 ### Contributing
 
