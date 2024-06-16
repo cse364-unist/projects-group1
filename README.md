@@ -162,16 +162,6 @@ If you click 'Explore Location' in the menu above, you can see a list of movies 
 
 If you go to the explore location tab and select a filming location, you can see a list of movies filmed at that filming location. Just select the desired filming location from the list next to ‘Select a location’.
 
-## FAQ
-
-### How do I reset my password?
-
-Go to the login page and click on "Forgot Password." Follow the instructions to reset your password.
-
-### Can I share my tasks with others?
-
-Currently, task sharing is not supported, but we are working on this feature for future releases.
-
 ## For Developers
 
 If you’re interested in contributing to our product, here’s how you can get started.
