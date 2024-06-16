@@ -1,315 +1,170 @@
-# Description of Features
+# FlickFriends
 
-## Party Room Feature
+Welcome to Flick Friends! Our product, called FlickFriends, is a new social network for movie lovers. It's a place where people who enjoy movies can connect with others, share their favorite films, and discover new ones, all while having fun together.
 
-- **Feature Description**: The Party Room feature allows users to access functionalities related to hosting virtual movie parties. It includes endpoints for managing movie lists, creating/deleting content, and providing detailed movie information. Here, "content" means additional content related to a movie made by a user.
+## Table of Contents
 
-<img width="998" alt="스크린샷 2024-05-01 오전 12 58 44" src="https://github.com/cse364-unist/projects-group1/assets/99570746/95f7d03c-1f88-4a45-9525-195bff7ea737">
+1. [Introduction](#introduction)
+2. [Getting Started](#getting-started)
+    - [Installation](#installation)
+    - [Access Webpage](#access-webpage)
+3. [Features](#features)
+    - [Party Room](#PartyRoom)
+    - [Quiz](#quiz)
+    - [Location based Recommendation](#location-based-recommendation)
+4. [Usage](#usage)
+5. [FAQ](#faq)
+6. [For Developers](#for-developers)
+    - [Contributing](#contributing)
 
-This backend serves a party room application where users can browse and interact with various multimedia contents. At localhost:8080/partyroom, users can access different movies and other content types. Each movie and content item is accessible via unique endpoints that support operations like POST for content generation and DELETE for content removal. Additional features include live chat functionalities integrated via WebSockets at dynamic endpoints depending on the movie or content being accessed, enhancing real-time user interaction. For external access, media information is linked through imageurl.com with specific endpoints for each content.
+## Introduction
 
-- **REST APIs**:
-  - `GET /partyroom/movies`: Retrieves a list of randomly selected movies by genre.
-  - `POST /partyroom/contents`: Creates new content for the party room.
-  - `GET /partyroom/contents`: Retrieves all available content for the party room.
-  - `DELETE /partyroom/contents/{contentName}`: Deletes content from the party room by its name.
-  - `GET /partyroom/movies/{movieId}`: Retrieves details about a specific movie, including its name, streaming video URL, and chat URL.
-  - `GET /partyroom/contents/{contentName}`: Retrieves details about specific content in the party room, including its name, streaming video URL, and chat URL.
+FlickFriends solves the problem of feeling disconnected while watching movies. Many existing platforms like Netflix don't let users chat with friends in real-time or explore movie details beyond basic ratings. This can make movie-watching feel lonely and limited. Users miss out on discussing films with others and discovering new movies beyond what they see.
 
-## Location-Based Movie Spot Recommendation Feature
+Users can easily access FlickFriends from their WEB browser. They can join movie events, explore filming locations, and take part in quizzes and discussions—all to make their movie experience more enjoyable.
 
-- **Feature Description**: The Location-Based Movie Spot Recommendation feature provides functionalities related to movie filming locations. It allows fetching information about specific movie filming locations, recommending nearby filming locations based on the user's location, and retrieving lists of all available filming locations.
-- **REST APIs**:
-  - `GET /places/{movieId}`: Retrieves information about a specific movie filming location.
-  - `GET /places/recommends/distance/{threshold}`: Recommends nearby filming locations based on the user's location.
-  - `GET /places`: Retrieves information about a specific filming location.
-  - `GET /places/all`: Retrieves lists of all available filming locations.
-  - `GET /places/all/{placeId}`: Retrieves a list of movies filmed at a specific filming location.
-  - `GET /places/recommends/{userId}`: Retrieves the top 5 recommended movie filming locations based on the user's location.
+By providing everything movie-related in one place, FlickFriends makes it easy to discover, discuss, and enjoy films. The platform's simple design and many features give users quick access to lots of movie content, making them feel part of a fun movie-loving community. Whether users want entertainment, information, or just to chat, FlickFriends makes it easy and fun.
 
-## Point System Feature
+## Getting Started
 
-- **Feature Description**: The Point System feature incentivizes user interaction and participation by rewarding points for activities like quizzes and reviews. It includes endpoints for managing user points.
-- **REST APIs**:
-  - `GET /quizzes/{quizId}`: Retrieves quiz details by quiz ID.
-  - `POST /quizzes/{quizId}`: Checks the user's answer for a quiz and returns the result.
-  - `POST /quizzes/reset/{quizId}`: Resets the status of the quiz for a specific user.
-  - `GET /users/{userId}`: Retrieves user details by user ID.
+To start using FlickFriends, follow these simple steps:
 
-# Example cURL Commands & Expected Outputs
-## Party Room Feature
-- `GET /partyroom/movies`
-  - **Description**: Retrieves a list of randomly selected movies by distinic genre.
-  - **cURL Command**: `curl -X GET http://localhost:8080/partyroom/movies`
-  - **Expected Output**:
-    ```json
-    [
-      {
-        "id": "662e4b7a01eddf58f8e49c41",
-        "movieId": 2974,
-        "name": "Bats (1999)",
-        "genre": "Horror|Thriller",
-        "url": "http://localhost:8080/movies/2974",
-        "placeId": 184
-      },
-      {
-        "id": "662e4b7a01eddf58f8e49f5a",
-        "movieId": 3767,
-        "name": "Missing in Action 2: The Beginning (1985)",
-        "genre": "Action|War",
-        "url": "http://localhost:8080/movies/3767",
-        "placeId": 113
-      },
-      {
-        "id": "662e4b7a01eddf58f8e49384",
-        "movieId": 674,
-        "name": "Barbarella (1968)",
-        "genre": "Adventure|Sci-Fi",
-        "url": "http://localhost:8080/movies/674",
-        "placeId": 61
-      }
-    ]
+### Installation
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/cse364-unist/projects-group1.git
     ```
-- `POST /partyroom/contents`
-  - **Description**: Creates new content for the party room.
-  - **cURL Command**: `curl -X POST http://localhost:8080/partyroom/contents -d "{\"contentName\": \"newContent\"}" -H "Content-Type: application/json"`
-  - **cURL Command**: `curl -X POST http://localhost:8080/partyroom/contents -d "{\"contentName\": \"newContent2\"}" -H "Content-Type: application/json"`
-  - **Expected Output**:
-    ```json
-    {
-      "id":"662e5183b8993c2b4e63fc99",
-      "name":"newContent",
-      "url":"http://localhost:8080/contents/newContent"
-    },
-    {
-      "id":"6631e11f89480e7bad92563b",
-      "name":"newContent2",
-      "url":"http://localhost:8080/contents/newContent2"
-    }
+2. Navigate to the project directory:
+    ```sh
+    cd projects-group1
     ```
-- `GET /partyroom/contents`
-  - **Description**: Retrieves all available content for the party room.
-  - **cURL Command**: `curl -X GET http://localhost:8080/partyroom/contents`
-  - **Expected Output**:
-    ```json
-    [
-      {
-        "id":"662e5183b8993c2b4e63fc99",
-        "name":"newContent",
-        "url":"http://localhost:8080/contents/newContent"
-      },
-      {
-        "id":"6631e11f89480e7bad92563b",
-        "name":"newContent2",
-        "url":"http://localhost:8080/contents/newContent2"
-      },
-      ...
-    ]
+3. Build the Docker image:
+    ```sh
+    docker build -t flickfriends/milestone3 .
     ```
-- `DELETE /partyroom/contents/{contentName}`
-  - **Description**: Deletes content from the party room by its name.
-  - **cURL Command**: `curl -X DELETE http://localhost:8080/partyroom/contents/newContent`
-  - **Expected Output**: `Content 'newContent' deleted successfully.`
-- `GET /partyroom/movies/{movieId}`
-  - **Description**: Retrieves details about a specific movie, including its name, streaming video URL, and chat URL.
-  - **cURL Command**: `curl -X GET http://localhost:8080/partyroom/movies/2974`
-  - **Expected Output**:
-    ```json
-    {
-      "chatUrl": "ws://localhost:8080/partyroom/chat/2974",
-      "streamVideoUrl": "http://videostreaming.com/partyroom/2974",
-      "movieName": "Bats (1999)"
-    }
+4. Run the Docker container:
+    ```sh
+    docker run -it -p 8080:8080 flickfriends/milestone3
     ```
-- `GET /partyroom/contents/{contentName}`
-  - **Description**: Retrieves details about specific content in the party room, including its name, streaming video URL, and chat URL.
-  - **cURL Command**: `curl -X GET http://localhost:8080/partyroom/contents/newContent`
-  - **Expected Output**:
-  ```json
-  {
-    "chatUrl": "ws://localhost:8080/partyroom/chat/newContent2",
-    "streamVideoUrl": "http://videostreaming.com/partyroom/newContent2",
-    "contentName": "newContent2"
-  }
-  ```
-
-## Location-Based Movie Spot Recommendation Feature
-- `GET /places/{movieId}`
-  - **Description**: Retrieves information about a specific movie filming location.
-  - **cURL Command**: `curl -X GET http://localhost:8080/places/184`
-  - **Expected Output**:
-    ```json
-    {
-      "placeId": 233,
-      "name": "loc233",
-      "hobby": 24,
-      "favoriteFood": 7
-    }
-    ```
-- `GET /places/recommends/distance/{threshold}`
-  - **Description**: Recommends nearby filming locations based on the user's location. The haversine formula is used to calculate the distance between each movie location and the user. At this time, latitude and longitude data of the user and the movie filming location are used. Returns movie locations with a distance less than the threshold.
-  - **cURL Command**: `curl -X GET http://localhost:8080/places/recommends/distance/50\?userId\=1`
-  - **Expected Output**:
-    ```json
-    [
-      {
-        "id": "662e4b7a01eddf58f8e49c41",
-        "movieId": 2974,
-        "name": "Bats (1999)",
-        "genre": "Horror|Thriller",
-        "url": "http://localhost:8080/movies/2974",
-        "placeId": 184
-      },
-      {
-        "id": "662e4b7a01eddf58f8e49f5a",
-        "movieId": 3767,
-        "name": "Missing in Action 2: The Beginning (1985)",
-        "genre": "Action|War",
-        "url": "http://localhost:8080/movies/3767",
-        "placeId": 113
-      },
-      {
-        "id": "662e4b7a01eddf58f8e49384",
-        "movieId": 674,
-        "name": "Barbarella (1968)",
-        "genre": "Adventure|Sci-Fi",
-        "url": "http://localhost:8080/movies/674",
-        "placeId": 61
-      }
-    ]
-    ```
-- `GET /places` 
-  - **Description**: Retrieves information about a specific filming location.
-  - **cURL Command**: `curl -X GET http://localhost:8080/places?placeId=1`
-  - **Expected Output**:
-    ```json
-    {
-      "placeId": 1,
-      "name": "loc1",
-      "hobby": 28,
-      "favoriteFood": 23
-    }
-    ```
-- `GET /places/all`
-  - **Description**: Retrieves lists of all available filming locations.
-  - **cURL Command**: `curl -X GET http://localhost:8080/places/all`
-  - **Expected Output**:
-    ```json
-    [
-      {
-        "id": "662e4b8458059d9b3b5f46bf",
-        "placeId": 5,
-        "name": "loc5",
-        "latitude": 37.9580935472931,
-        "longitude": 125.697640715773,
-        "hobby": 25,
-        "favoriteFood": 23
-      },
-      {
-        "id": "662e4b8458059d9b3b5f46c0",
-        "placeId": 12,
-        "name": "loc12",
-        "latitude": 38.53235047499,
-        "longitude": 129.374480582964,
-        "hobby": 24,
-        "favoriteFood": 23
-      },
-      ...
-    ]
-    ```
-- `GET /places/all/{placeId}`
-  - **Description**: Retrieves a list of movies filmed at a specific filming location.
-  - **cURL Command**: `curl -X GET http://localhost:8080/places/all/5`
-  - **Expected Output**:
-    ```json
-    [
-      {
-        "name": "No Escape (1994)",
-        "genre": "Action|Sci-Fi",
-        "placeId": 5
-      },
-      {
-        "name": "Charm's Incidents (1996)",
-        "genre": "Drama",
-        "placeId": 5
-      },
-      ...
-    ]
-    ```
-- `GET /places/recommends/{userId}`
-  - **Description**: Retrieves the top 5 recommended movie filming locations based on the user's location. hobby and favoriteFood are int type and express what kind of play and food the user likes through bit units. For example, 10010 (18) means having a hobby corresponding to the first bit and a hobby corresponding to the fourth bit. Therefore, the Hamming distance, which represents the distance between bits, is used to calculate the distance between the movie location's (hobby and favorite food) and the user's (hobby and favorite) food data to recommend the movie locations.
-  - **cURL Command**: `curl -X GET http://localhost:8080/places/recommends/1`
-  - **Expected Output**:
-    ```json
-    [
-      {
-        "id": "662e4b8458059d9b3b5f46d9",
-        "placeId": 27,
-        "name": "loc27",
-        "latitude": 34.8019189947536,
-        "longitude": 128.171284742741,
-        "hobby": 2,
-        "favoriteFood": 10
-      },
-      {
-        "id": "662e4b8458059d9b3b5f46f5",
-        "placeId": 55,
-        "name": "loc55",
-        "latitude": 40.4210603644662,
-        "longitude": 129.041489369307,
-        "hobby": 18,
-        "favoriteFood": 10
-      },
-      ...
-    ]
+5. Inside the Docker container, execute the following script to start the server and run the web application:
+    ```sh
+    ./run.sh
     ```
 
-## Point System Feature
-- `GET /quizzes/{quizId}`
-  - **Description**: Retrieves quiz details by quiz ID.
-  - **cURL Command**: `curl -X GET http://localhost:8080/quizzes/1`
-  - **Expected Output**:
-    ```json
-    {
-      "movieId": 1,
-      "movieName": "Toy Story (1995)",
-      "quizNum": 1,
-      "quizBody": "movie1 quiz1 Body"
-    }
-    ```
-- `POST /quizzes/{quizId}`
-  - **Description**: Checks the user's answer for a quiz and returns the result.
-  - **cURL Command**: `curl -X POST http://localhost:8080/quizzes/1 -d "{\"userId\": 1, \"answer\": \"A\"}" -H "Content-Type: application/json"`
-  - **Expected Output**:
-    ```json
-    {
-      "quizId":1,
-      "userId":1,
-      "resultMessage":"Wrong Answer!"
-    }
-    ```
-- `POST /quizzes/reset/{quizId}`
-  - **Description**: Resets the status of the quiz for a specific user.
-  - **cURL Command**: `curl -X POST http://localhost:8080/quizzes/reset/1 -d "{\"userId\": 1}" -H "Content-Type: application/json"`
-  - **Expected Output**:
-    ```json
-    {
-      "quizId":1,
-      "userId":1,
-      "resultMessage":"Successfully reset"
-    }
-    ```
-- `GET /users/{userId}`
-  - **Description**: Retrieves user details by user ID.
-  - **cURL Command**: `curl -X GET http://localhost:8080/users/1`
-  - **Expected Output**:
-    ```json
-    {
-      "userId": 1,
-      "points": 74
-    }
-    ```
+### run.sh
 
-# Additional Notes
+Here is the content of the `run.sh` script that needs to be executed inside the Docker container:
 
-- The implemented features cover functionalities related to hosting virtual movie parties, accessing movie shooting location details, and managing user points. However, certain aspects mentioned in the initial proposal, such as real-time video streaming and live chat, are not fully implemented in the current codebase.
+```sh
+git clone https://github.com/cse364-unist/projects-group1.git
+cd projects-group1/
+git checkout milestone3_Application
+
+mongod --fork --logpath /var/log/mongodb.log
+mongosh admin --eval "db.createUser({ user: 'user', pwd: 'password', roles: ['userAdminAnyDatabase'] })"
+mongoimport --db=assign1 --collection=movie --authenticationDatabase admin --username user --password password --type=csv --file=data/movies.csv --fields=movieId.int32(),name.string(),genre.string(),placeId.int32() --columnsHaveTypes
+mongoimport --db=assign1 --collection=rating --authenticationDatabase admin --username user --password password --type=csv --file=data/ratings.csv --fields=userId.int32(),movieId.int32(),rating.int32(),timestamp.string() --columnsHaveTypes
+mongoimport --db=assign1 --collection=user --authenticationDatabase admin --username user --password password --type=csv --file=data/users.csv --fields=userId.int32(),gender.string(),age.int32(),occupation.int32(),zipCode.string(),point.int32(),movieStatus.int32(),latitude.double(),longitude.double(),hobby.int32(),favoriteFood.int32() --columnsHaveTypes
+mongoimport --db=assign1 --collection=place --authenticationDatabase admin --username user --password password --type=csv --file=data/moviePlaces.csv --fields=placeId.int32(),name.string(),latitude.double(),longitude.double(),hobby.int32(),favoriteFood.int32() --columnsHaveTypes
+mongoimport --db=assign1 --collection=quiz --authenticationDatabase admin --username user --password password --type=csv --file=data/quizzes.csv --fields=quizId.int32(),movieId.int32(),quizNum.int32(),quizBody.string(),quizAnswer.int32() --columnsHaveTypes
+
+mvn jacoco:report 
+mvn clean package 
+rm -rf /root/project/tomcat/webapps/ROOT
+cp target/cse364-project.war /root/project/tomcat/webapps/ROOT.war
+cd /root/project/tomcat/bin
+./catalina.sh run
+```
+
+### access-webpage
+
+비워두자
+
+1. **Sign Up:** Create an account by providing your email and a password.
+2. **Log In:** Use your credentials to log in to the application.
+3. **Create a Task:** Navigate to the 'Create Task' section and enter the details of your task.
+4. **Manage Tasks:** View and manage your tasks from the dashboard.
+
+## Features
+
+Our product comes with three key features to enhance your experience:
+
+### PartyRoom
+
+One of the key features of our proposed movie product is the "Party Room" functionality, inspired by services like Watcha and Naver-Vibe. This feature allows users to join virtual rooms created by a host to watch movies in real-time, enhancing community engagement. 
+
+- **Direct Access:** You can access the Party Room directly via [http://localhost:8080/partyroom.html](http://localhost:8080/partyroom.html).
+
+![Party Room Main Page](images/partyroom_main.png)
+
+In the Party Room, you will see a list of movies that are displayed with their genres. These movies are fetched randomly from the database to ensure a variety of genres each time. When you click the white “Movie List” header at the top, the page will reload, providing you with a new set of movies to explore.
+
+At the bottom of the page, you will find the “Add New Content” section. This feature allows users to enter the title of a movie or content they wish to add, enabling the creation of new party rooms.
+
+![Party Room Main Page with New Content Create](images/partyroom_main_with_content_create.png)
+
+You can see the results of typing "Software Engineering" and pressing the "Add Content" button on the right in the screenshot above. These created contents can also be deleted through the "DELETE" button.
+
+Now, let's try accessing each party room. Click the "Magnum Force (1973)" button in the picture to link to a new webpage: [http://localhost:8080/partyroom_detail.html?id=3682&type=movie](http://localhost:8080/partyroom_detail.html?id=3682&type=movie). This link directs you to the `partyroom_detail.html` file, where the specific page is generated based on the unique ID and type of content (whether it's a movie or other types of content). 
+
+![Party Room Each Page](images/partyroom_each_web.png)
+
+Each party room webpage includes live chat functionality and video streaming capabilities. (Due to the large file size required for live video streaming, this project substitutes the video with images.) The live chat feature is fully functional. Users accessing the same URL (mapped by the ID and type) can engage in real-time chat, enhancing the interactive experience.
+
+![Party Room Each Page with Details](images/partyroom_each_web_detail.png)
+
+Finally, you can use the quiz system related to movies by pressing the quiz button at the bottom of the web page, which will be followed by the following features.
+
+### quiz
+
+This feature is an organically connected feature with the "Party Room". Our product focuses on creating a user-friendly movie streaming platform that emphasizes community engagement and enjoyment. One of the key features we're implementing is a point system designed to enhance user interaction and participation. Users will be able to stream movies together, regardless of their physical locations, and engage in activities like quizzes and reviews to earn points.
+
+### location-based-recommendation
+
+
+## Usage
+
+Here’s a brief overview of how to use the main features of MyApplication:
+
+### Creating a Task
+
+1. Click on the "Create Task" button.
+2. Fill in the task details such as title, description, due date, and priority level.
+3. Click "Save" to add the task to your list.
+
+### Managing Tasks
+
+1. Navigate to the "Dashboard" to view your tasks.
+2. Click on a task to edit or delete it.
+3. Use the filters to view tasks by status, priority, or due date.
+
+### Receiving Notifications
+
+1. Ensure that notifications are enabled in your settings.
+2. Receive reminders for tasks that are due soon or overdue.
+
+## FAQ
+
+### How do I reset my password?
+
+Go to the login page and click on "Forgot Password." Follow the instructions to reset your password.
+
+### Can I share my tasks with others?
+
+Currently, task sharing is not supported, but we are working on this feature for future releases.
+
+## For Developers
+
+If you’re interested in contributing to MyApplication, here’s how you can get started.
+
+### Contributing
+
+We welcome contributions! Here’s how you can help:
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/YourFeature`
+3. Make your changes and commit them: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin feature/YourFeature`
+5. Open a pull request.
+
